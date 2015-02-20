@@ -20,8 +20,12 @@ if (window.matchMedia("(max-width: 639px)").matches){
 }
 
 Router.run(routes, (Handler) => {
-  return React.render(<Handler routerState={state} deviceType={deviceType} environment="browser" />, document.body);
+  return React.render(<Handler />, document.body);
 });
+
+// Router.run(routes, (Handler) => {
+//   return React.render(<Handler routerState={state} deviceType={deviceType} environment="browser" />, document.body);
+// });
 
 // Use the HTML5 history API for cleaner URLs:
 // Router.run(routes, Router.HistoryLocation, (Handler) => {

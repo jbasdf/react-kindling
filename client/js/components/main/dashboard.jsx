@@ -11,7 +11,7 @@ module.exports = React.createClass({
   render: function(){
     return (<div>
       <div className="page-header text-center">
-        <h1><span className="fa fa-anchor"></span> Dashboard</h1>
+        <h1><span className="fa fa-anchor"></span> I am the Dashboard</h1>
         <Link to="logout">Logout</Link>
       </div>
     </div>);
