@@ -9,24 +9,42 @@ const Link = Router.Link;
 module.exports = React.createClass({
   render: function(){
     return (<div>
-      <form action="/login" method="post">
-        <div className="form-group">
-          <label>Email</label>
-          <input type="text" className="form-control" name="email" />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" className="form-control" name="password" />
-        </div>
-        <button type="submit" className="btn btn-warning btn-lg">Login</button>
-      </form>
-      <ul>
-        <li><a href="/auth/facebook" className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a></li>
-        <li><a href="/auth/twitter" className="btn btn-info"><span className="fa fa-twitter"></span> Twitter</a></li>
-        <li><a href="/auth/google" className="btn btn-danger"><span className="fa fa-google-plus"></span> Google+</a></li>
-      </ul>  
-      <p>Need an account? <Link to="register">Sign Up</Link></p>
-      <p>Or go <Link to="home">home</Link>.</p>
+      <Paper>
+        <form action="/login" method="post">
+
+          <h4>Login</h4>
+
+          <TextField hintText="yofool@mycrib.com" floatingLabelText="Email"/>
+          <TextField hintText="******" floatingLabelText="Password"/>
+
+          <Link to="register">Create Account</Link>
+          <FlatButton label="Create Account" />
+          <FlatButton label="Login" primary={true} />
+
+        </form>
+      </Paper>
+
+      <div className="button-example-container">
+        <RaisedButton linkButton={true} href="/auth/facebook" secondary={true}>
+          <FontIcon className="muidocs-icon-custom-facebook example-button-icon"/>
+          <span className="mui-raised-button-label example-icon-button-label">Facebook</span>
+        </RaisedButton>
+      </div>
+
+      <div className="button-example-container">
+        <RaisedButton linkButton={true} href="/auth/twitter" secondary={true}>
+          <FontIcon className="muidocs-icon-custom-twitter example-button-icon"/>
+          <span className="mui-raised-button-label example-icon-button-label">Twitter</span>
+        </RaisedButton>
+      </div>
+
+      <div className="button-example-container">
+        <RaisedButton linkButton={true} href="/auth/google" secondary={true}>
+          <FontIcon className="muidocs-icon-custom-google example-button-icon"/>
+          <span className="mui-raised-button-label example-icon-button-label">Google+</span>
+        </RaisedButton>
+      </div>
+
     </div>);
   }
 });
