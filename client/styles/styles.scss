@@ -1,0 +1,9 @@
+@import 'defines';
+@import '../../node_modules/font-awesome/scss/font-awesome';
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'common';
+
+body{
+  min-height: 2000px;
+  padding-top: 50px;
+}
