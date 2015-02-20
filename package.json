@@ -6,17 +6,20 @@
   "description": "Template for a React.js application",
   "repository": "https://github.com/jbasdf/react_kindling",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "test": "jest"
   },
   "jest": {
-    "scriptPreprocessor": "preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
-      "node_modules/react"
+      "react"
     ],
+    "testFileExtensions": ["es6", "js", "jsx"],
     "moduleFileExtensions": [
       "js",
       "jsx",
-      "json"
+      "json",
+      "es6"
     ]
   },
   "dependencies": {
@@ -50,6 +53,7 @@
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",
     "babel-core": "^4.3.0",
+    "babel-jest": "^4.0.0",
     "babel-loader": "^4.0.0",
     "browser-sync": "^2.0.1",
     "bufferstreams": "^1.0.1",
@@ -81,6 +85,7 @@
     "gulp-util": "^3.0.1",
     "html-minifier": "^0.7.0",
     "imports-loader": "~0.6.3",
+    "jest": "*",
     "jest-cli": "^0.4.0",
     "jshint": "^2.5.11",
     "jshint-loader": "^0.8.0",
