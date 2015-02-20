@@ -6,12 +6,18 @@
   "description": "Template for a React.js application",
   "repository": "https://github.com/jbasdf/react_kindling",
   "scripts": {
-     "test": "jest"
+    "start": "gulp"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"],
-    "moduleFileExtensions": ["js", "jsx", "json"]
+    "scriptPreprocessor": "preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "node_modules/react"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ]
   },
   "dependencies": {
     "babel": "^4.3.0",
@@ -94,8 +100,5 @@
     "webpack": "^1.5.3",
     "webpack-compile-templates": "^0.1.3",
     "webpack-dev-server": "^1.7.0"
-  },
-  "scripts": {
-    "start": "gulp"
   }
 }
