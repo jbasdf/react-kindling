@@ -86,6 +86,8 @@
     "jshint-loader": "^0.8.0",
     "jshint-stylish": "^1.0.0",
     "karma": "^0.12.30",
+    "less": "^2.4.0",
+    "less-loader": "^2.0.0",
     "minimist": "^1.1.0",
     "npm-shrinkwrap": "^5.1.0",
     "protractor": "^1.5.0",

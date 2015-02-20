@@ -29,7 +29,7 @@ var webpackConfig     = require('./config/webpack.config.js')(release);
 gulp.task('default', ['serve:hot', 'serve:sync']);
 
 gulp.task('build', ['clean'], function(callback){
-  var tasks = ['scripts', 'styles', 'images', 'assets', 'fonts'];
+  var tasks = ['webpack', 'images', 'assets', 'fonts'];
   if(settings.projectType == 'client'){
     tasks.push('html');
   }
@@ -48,12 +48,12 @@ gulp.task('clean', function(callback){
 });
 
 // js packaging with webpack
-gulp.task('scripts', function(callback){
+gulp.task('webpack', function(callback){
   webpack(webpackConfig, function (err, stats){
     if(err){
-      throw new gutil.PluginError('scripts', err);
+      throw new gutil.PluginError('webpack', err);
     }
-    gutil.log('scripts', stats.toString({ colors: true }));
+    gutil.log('webpack', stats.toString({ colors: true }));
     return callback();
   });
 });
@@ -62,20 +62,6 @@ gulp.task('hint', function(){
   return gulp.src(settings.scripts.paths.all)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'));
-});
-
-gulp.task('styles', function(){
-  var styles = gulp.src(settings.styles.paths.all)
-      .pipe(sass())
-      .pipe(autoprefixer(settings.styles.autoPrefix));
-  if(release){
-    return styles
-      .pipe(minifycss())
-      .pipe(gulp.dest(settings.styles.paths.output.prod));
-  } else {
-    return styles
-      .pipe(gulp.dest(settings.styles.paths.output.dev));
-  }
 });
 
 gulp.task('images', function(){
@@ -187,7 +173,6 @@ gulp.task('serve:sync', ['serve'], function(callback) {
   });
 
   gulp.watch([
-        settings.styles.paths.all,
         settings.html.paths.all,
         settings.images.paths.all,
         settings.assets.paths.all,

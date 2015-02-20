@@ -7,7 +7,7 @@ module.exports = function(release){
 
   var autoprefix = '{browsers:["Android 2.3", "Android >= 4", "Chrome >= 20", "Firefox >= 24", "Explorer >= 8", "iOS >= 6", "Opera >= 12", "Safari >= 6"]}';
   var jsLoaders = ['babel-loader?experimental&optional=selfContained'];
-  var cssLoaders = ['style-loader', 'css-loader', 'autoprefixer-loader?' + autoprefix];
+  var cssLoaders = ['style-loader', 'css-loader', 'autoprefixer-loader'];
   var scssLoaders = ['sass-loader?outputStyle=expanded&includePaths[]=' + (path.resolve(__dirname, './node_modules/bootstrap-sass'))].concat(cssLoaders);
   var lessLoaders = ['less-loader'].concat(cssLoaders);
 
@@ -66,8 +66,9 @@ module.exports = function(release){
       loaders: [
         { test: /\.js$/,              loaders: jsLoaders, exclude: /node_modules/ },
         { test: /\.jsx?$/,            loaders: jsLoaders, exclude: /node_modules/ },
-        { test: /\.scss$/,            loader:  scssLoaders },
-        { test: /\.css$/ ,            loader:  cssLoaders },
+        { test: /\.scss$/,            loaders: scssLoaders },
+        { test: /\.css$/ ,            loaders: cssLoaders },
+        { test: /\.less$/ ,           loaders: lessLoaders },
         { test: /\.html$/,            loader:  'webpack-compile-templates' },
         { test: /.*\.(gif|png|jpg|jpeg|svg)$/, loaders: ['file?hash=sha512&digest=hex&size=16&name=[hash].[ext]', 'image-webpack-loader?optimizationLevel=7&interlaced=false']},
         { test: /.*\.(eot|woff2|woff|ttf)/, loader: 'file?hash=sha512&digest=hex&size=16&name=cd [hash].[ext]'}

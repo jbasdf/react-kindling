@@ -64,7 +64,9 @@ module.exports = {
     paths: {
       all: clientAppPath + 'js/**/*.js',
       entries: {
-        index: clientAppPath + 'js/app.jsx'
+        index: clientAppPath + 'js/app.jsx',
+        //styles: clientAppPath + 'styles/styles.scss'
+        styles: clientAppPath + 'styles/styles.less'
       },
       output: {
         dev: devOutput + 'js',
