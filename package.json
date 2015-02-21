@@ -14,7 +14,11 @@
     "unmockedModulePathPatterns": [
       "react"
     ],
-    "testFileExtensions": ["es6", "js", "jsx"],
+    "testFileExtensions": [
+      "es6",
+      "js",
+      "jsx"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
@@ -39,6 +43,7 @@
     "font-awesome": "^4.2.0",
     "jquery": "^2.1.3",
     "lodash": "^3.2.0",
+    "material-ui": "^0.7.0",
     "mongoose": "~3.8.1",
     "morgan": "~1.0.0",
     "passport": "~0.1.17",

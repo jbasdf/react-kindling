@@ -237,3 +237,8 @@ gulp.task('pagespeed', function(callback) {
     // key: 'YOUR_API_KEY'
   }, callback);
 });
+
+// Just a wrapper to run test if want to use gulp for everything
+gulp.task('test', shell.task([
+  'npm test'
+]));

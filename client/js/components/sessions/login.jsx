@@ -3,8 +3,8 @@
 "use strict";
 
 import React from "react";
-import Router from "react-router";
-const Link = Router.Link;
+import { Link } from "react-router";
+import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 module.exports = React.createClass({
   render: function(){
