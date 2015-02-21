@@ -3,13 +3,15 @@
 This is a React.js starter project. You can use it to build a client only application or a full stack node.js application.
 
 ## What's included
-Gulp              - For building assets, launching development servers and deploying
-Webpack           - For bundling javascript and other assets as required
-React Hot Loader  - 
-Express
-Passport.js
-React.js
-
+[Gulp](http://gulpjs.com/)                                        - For building assets, launching development servers and deploying
+[Webpack](http://webpack.github.io/)                              - For bundling javascript and other assets as required
+[React Hot Loader](https://github.com/gaearon/react-hot-loader)   - For quick reloads of css and js changes
+[Express](http://expressjs.com/)                                  - For middleware and serving pages
+[Passport.js](http://passportjs.org/)                             - For authentication
+[React.js](http://facebook.github.io/react/)                      - For sheer awesomeness
+[React Router](https://github.com/rackt/react-router)             - For managing the routes of the sheer awesomeness
+[Mongoose](http://mongoosejs.com/)                                - For talking to MongoDB
+[MaterialUi](http://callemall.github.io/material-ui/#/)           - Because not everything has to be Bootstrap
 
 
 ## Usage
@@ -22,6 +24,11 @@ __Install the dependencies:__
 
 `npm install`
 
+__Configuration:__
+
+Change `config/secrets.js.example` to `config/secrets.js`. Change 'sessionSecret' and set your database. If you want
+to use Facebook, Twitter or Google for authentication setup your keys and secrets.
+
 __Development mode with livereload:__
 
 To start node and the webpack server just type:
@@ -32,7 +39,8 @@ node server.js
 gulp serve:hot
 
 
-## Develpment
+## Development
+You can use React-Kindling to build a client only application or a client-server application.
 
 ### Client Only
 Open up settings. Change 'projectType' to 'client'. When you run 'gulp' all of the assets in the 'client' directory
@@ -43,17 +51,27 @@ production files will be in /public.
 Open up settings. Change 'projectType' to 'client-server'. 
 
 ## Testing
+React Kindling uses [Jest](https://facebook.github.io/jest/) for tests
 
-### Database
+Run `npm test`
 
-#### Migrations
+## Database
+
+### Migrations
+React Kindling uses MongoDB. PostGreSQL support is coming. Here are some resources:
+
 http://www.quora.com/What-are-my-options-for-SQL-database-migrations-with-Node-js
 https://github.com/kunklejr/node-db-migrate
 https://github.com/thuss/standalone-migrations
 https://github.com/rosenfeld/active_record_migrations
 
 ## Setup
-config/settings
+
+Sensitive values live in:
+config/secrets.js
+
+Build configuration lives in:
+config/settings.js
 
 ## Deployment
 

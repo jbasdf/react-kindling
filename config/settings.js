@@ -50,9 +50,9 @@ module.exports = {
   fonts: {
     paths: {
       all: [
-        clientAppPath + 'fonts/**',
-        './node_modules/bootstrap-sass/assets/fonts/**',
-        './node_modules/font-awesome/fonts/**'
+        clientAppPath + 'fonts/**'
+        // './node_modules/bootstrap-sass/assets/fonts/**',
+        // './node_modules/font-awesome/fonts/**'
       ],
       output: {
         dev: devOutput + 'fonts',
