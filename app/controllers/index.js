@@ -50,14 +50,17 @@ module.exports = function(app){
         }), null);
       });
 
-      var scriptPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/index.js';
+      var scriptPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/app.js';
+      var cssPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/styles.css';
       if(process.env.NODE_ENV === "production"){
-        scriptPath = '/index.js';
+        scriptPath = '/app.js';
+        cssPath = '/styles.css'
       }
-      
+
       res.render('index.ejs', {
         content: content, 
-        scriptPath: scriptPath
+        scriptPath: scriptPath,
+        cssPath: cssPath
       });
     }
 

@@ -64,9 +64,8 @@ module.exports = {
     paths: {
       all: clientAppPath + 'js/**/*.js',
       entries: {
-        index: clientAppPath + 'js/app.jsx',
-        //styles: clientAppPath + 'styles/styles.scss'
-        styles: clientAppPath + 'styles/styles.less'
+        app: clientAppPath + 'js/app.jsx',
+        styles: clientAppPath + 'styles/styles.js'
       },
       output: {
         dev: devOutput + 'js',
@@ -82,6 +81,7 @@ module.exports = {
     autoPrefix: ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'],
     paths: {
       all: clientAppPath + 'styles/**/*.scss',
+      
       output: {
         dev: devOutput + 'css/',
         prod: prodOutput + 'css/'
