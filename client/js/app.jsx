@@ -7,6 +7,14 @@ import Router from 'react-router';
 
 import routes from './routes';
 
+//Needed for onTouchTap
+//Can go away when react 1.0 release
+//Check this repo:
+//https://github.com/zilverline/react-tap-event-plugin
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
+
+
 // Set a device type based on window width, so that we can write media queries in javascript
 // by calling if (this.props.deviceType === "mobile")
 var deviceType;
