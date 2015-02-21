@@ -3,15 +3,15 @@
 This is a React.js starter project. You can use it to build a client only application or a full stack node.js application.
 
 ## What's included
-[Gulp](http://gulpjs.com/)                                        - For building assets, launching development servers and deploying
-[Webpack](http://webpack.github.io/)                              - For bundling javascript and other assets as required
-[React Hot Loader](https://github.com/gaearon/react-hot-loader)   - For quick reloads of css and js changes
-[Express](http://expressjs.com/)                                  - For middleware and serving pages
-[Passport.js](http://passportjs.org/)                             - For authentication
-[React.js](http://facebook.github.io/react/)                      - For sheer awesomeness
-[React Router](https://github.com/rackt/react-router)             - For managing the routes of the sheer awesomeness
-[Mongoose](http://mongoosejs.com/)                                - For talking to MongoDB
-[MaterialUi](http://callemall.github.io/material-ui/#/)           - Because not everything has to be Bootstrap
+- [Gulp](http://gulpjs.com/)                                        - For building assets, launching development servers and deploying
+- [Webpack](http://webpack.github.io/)                              - For bundling javascript and other assets as required
+- [React Hot Loader](https://github.com/gaearon/react-hot-loader)   - For quick reloads of css and js changes
+- [Express](http://expressjs.com/)                                  - For middleware and serving pages
+- [Passport.js](http://passportjs.org/)                             - For authentication
+- [React.js](http://facebook.github.io/react/)                      - For sheer awesomeness
+- [React Router](https://github.com/rackt/react-router)             - For managing the routes of the sheer awesomeness
+- [Mongoose](http://mongoosejs.com/)                                - For talking to MongoDB
+- [MaterialUi](http://callemall.github.io/material-ui/#/)           - Because not everything has to be Bootstrap
 
 
 ## Usage
@@ -60,10 +60,10 @@ Run `npm test`
 ### Migrations
 React Kindling uses MongoDB. PostGreSQL support is coming. Here are some resources:
 
-http://www.quora.com/What-are-my-options-for-SQL-database-migrations-with-Node-js
-https://github.com/kunklejr/node-db-migrate
-https://github.com/thuss/standalone-migrations
-https://github.com/rosenfeld/active_record_migrations
+- http://www.quora.com/What-are-my-options-for-SQL-database-migrations-with-Node-js
+- https://github.com/kunklejr/node-db-migrate
+- https://github.com/thuss/standalone-migrations
+- https://github.com/rosenfeld/active_record_migrations
 
 ## Setup
 
