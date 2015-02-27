@@ -3,26 +3,31 @@
 "use strict";
 
 import React from 'react';
-import Link from 'react-router';
+import { Link } from 'react-router';
+import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 module.exports = React.createClass({
-  render: function(){
+  
+  handleClick(){
+    var email = this.refs.email.getValue();
+    var password = this.refs.password.getValue();
+  },
+
+  render(){
     return (<div>
       <h1><span className="fa fa-sign-in"></span> Signup</h1>
       <form action="/signup" method="post">
-        <div className="form-group">
-          <label>Email</label>
-          <input type="text" className="form-control" name="email" />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" className="form-control" name="password" />
-        </div>
-        <button type="submit" className="btn btn-warning btn-lg">Signup</button>
+        <TextField hintText="yofool@mycrib.com" floatingLabelText="Email" ref="email" />
+        <TextField hintText="******" floatingLabelText="Password" ref="password" />
+        <RaisedButton label="Signup" onTouchTap={this.handleClick} primary={true} />
       </form>
-      <p>Already have an account? <a href="/login">Login</a></p>
+      <p>
+        Already have an account? 
+        <Link to="login">Login</Link>
+      </p>
     </div>);
   }
+
 });
 
 
