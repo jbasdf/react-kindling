@@ -1,8 +1,8 @@
 import React from "react";
 
-var func = React.PropTypes;
+var { func } = React.PropTypes;
 
-module.exports = (Component, props, stubs) => {
+export default function(Component, props, stubs){
   return React.createClass({
     childContextTypes: {
       makePath: func,

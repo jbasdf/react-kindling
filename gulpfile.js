@@ -14,6 +14,7 @@ var replace       = require('gulp-replace');
 var rename        = require('gulp-rename');
 var shell         = require('gulp-shell');
 
+var jest              = require('jest-cli');
 var runSequence       = require('run-sequence');
 var path              = require('path');
 var argv              = require('minimist')(process.argv.slice(2));
@@ -24,6 +25,10 @@ var del               = require('del');
 var release           = argv.release || false;
 var settings          = require('./config/settings.js');
 var webpackConfig     = require('./config/webpack.config.js')(release);
+
+var jestConfig        = require('./package.json')['jest'];
+
+jestConfig.rootDir    = __dirname;
 
 // Tasks
 gulp.task('default', ['serve:hot', 'serve:sync']);
@@ -238,7 +243,19 @@ gulp.task('pagespeed', function(callback) {
   }, callback);
 });
 
-// Just a wrapper to run test if want to use gulp for everything
-gulp.task('test', shell.task([
-  'npm test'
-]));
+// Run tests
+gulp.task('test', function(done) {
+  jest.runCLI({
+    config: jestConfig
+  }, ".", function() {
+    done();
+  });
+});
+
+// Watch for changes and run tests
+gulp.task('tdd', function(done) {
+  gulp.watch([
+    jestConfig.rootDir + "__test__/**/*.js",
+    jestConfig.rootDir + "client/js/**/*"
+  ], ['test']);
+});

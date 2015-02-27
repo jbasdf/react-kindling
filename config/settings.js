@@ -38,6 +38,10 @@ module.exports = {
     './server.js',
     './app/**/*'
   ],
+  clientFiles: [
+    './client/js/**/*',
+    './__tests__/**/*'
+  ],
   assets: {
     paths: {
       all: clientAppPath + 'assets/**/*',
