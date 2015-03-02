@@ -8,8 +8,8 @@ import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-u
 
 module.exports = React.createClass({
   render: function(){
-    return (<div>
-      <Paper>
+    return (<div className="login-screen">
+      <Paper className="login-paper">
         <form action="/login" method="post">
 
           <h4>Login</h4>
@@ -25,21 +25,21 @@ module.exports = React.createClass({
       </Paper>
 
       <div className="button-example-container">
-        <RaisedButton linkButton={true} href="/auth/facebook" secondary={true}>
+        <RaisedButton className="auth-button" linkButton={true} href="/auth/facebook" secondary={true}>
           <FontIcon className="muidocs-icon-custom-facebook example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Facebook</span>
         </RaisedButton>
       </div>
 
       <div className="button-example-container">
-        <RaisedButton linkButton={true} href="/auth/twitter" secondary={true}>
+        <RaisedButton className="auth-button" linkButton={true} href="/auth/twitter" secondary={true}>
           <FontIcon className="muidocs-icon-custom-twitter example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Twitter</span>
         </RaisedButton>
       </div>
 
       <div className="button-example-container">
-        <RaisedButton linkButton={true} href="/auth/google" secondary={true}>
+        <RaisedButton className="auth-button" linkButton={true} href="/auth/google" secondary={true}>
           <FontIcon className="muidocs-icon-custom-google example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Google+</span>
         </RaisedButton>

@@ -4,13 +4,18 @@
 
 import React from "react";
 import {RouteHandler, Link} from "react-router";
+import { Toolbar, ToolbarGroup, Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
+
+// Components for nav bar.
+ 
+
 
 module.exports = React.createClass({
   render: function(){
     return (
       <div>
         <header>
-          <ul>
+        <ul>
             <li><Link to="login"><span className="fa fa-user"></span> Login</Link></li>
             <li><Link to="logout">Logout</Link></li>
             <li><Link to="register"><span className="fa fa-user"></span> Sign Up</Link></li>

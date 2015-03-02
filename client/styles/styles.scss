@@ -7,3 +7,24 @@ body{
   min-height: 2000px;
   padding-top: 0px;
 }
+
+.login-screen{
+	margin: auto;
+}
+
+.login-paper{
+	width: 345px;
+	margin: auto;
+	> div {
+		padding: 23px;
+	}
+}
+
+.auth-button{
+	width: 345px;
+	margin: 10px auto;
+	display:block;
+}
+
+
+
