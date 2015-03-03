@@ -1,17 +1,16 @@
-/* material-ui */
 @import "../../node_modules/material-ui/src/less/scaffolding.less";
-
-//Define a custom less file to override any variables defined in scaffolding.less
-@import "_custom-overrides.less";
-
+@import "./_custom.less"; //Define a custom less file to override any variables defined in scaffolding.less
 @import "../../node_modules/material-ui/src/less/components.less";
 
-//Your custom app styles
-.example-page {
-  text-align: center;
-  padding-top: 200px;
+.login-container{
+  .mui-paper{
+    width: 400px;
+    margin: 0 auto;
+  }
 }
 
-.example-icon-button-icon{
-	margin: auto;
+.mui-paper{
+  form{
+    margin: 20px;
+  }
 }
