@@ -7,10 +7,15 @@ import { Link } from "react-router";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 module.exports = React.createClass({
+  handleLogin: function(e){
+    e.preventDefault();
+    console.log('clicked');
+  },
+
   render: function(){
     return (<div className="login-screen">
       <Paper className="login-paper">
-        <form action="/login" method="post">
+        <form action="/login" method="post" onSubmit={this.handleLogin}>
 
           <h4>Login</h4>
 
@@ -18,7 +23,6 @@ module.exports = React.createClass({
           <TextField hintText="******" floatingLabelText="Password"/>
 
           <Link to="register">Create Account</Link>
-          <FlatButton label="Create Account" />
           <FlatButton label="Login" primary={true} />
 
         </form>
