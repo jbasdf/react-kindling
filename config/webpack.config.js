@@ -48,8 +48,8 @@ module.exports = function(release){
       modulesDirectories: ["web_modules", "node_modules", "bower_components", "vendor"]
     },
     cache: true,
-    //debug: !release,                      // http://webpack.github.io/docs/configuration.html#debug
-    //devtool: release ? false : "eval",    // http://webpack.github.io/docs/configuration.html#devtool
+    //debug: !release,                          // http://webpack.github.io/docs/configuration.html#debug
+    devtool: release ? false : "source-map",    // http://webpack.github.io/docs/configuration.html#devtool
     entry: entries,
     stats: {
       colors: true,

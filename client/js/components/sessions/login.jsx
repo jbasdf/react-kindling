@@ -2,25 +2,39 @@
 
 "use strict";
 
-import React from "react";
-import { Link } from "react-router";
+import React        from "react";
+import { Link }     from "react-router";
+import UserActions  from "../../actions/user";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
-module.exports = React.createClass({
+export default React.createClass({
+
+  handleLogin(e){
+    e.preventDefault();
+    UserActions.register({
+      email: this.refs.email.getValue(),
+      password: this.refs.password.getValue()
+    });
+  },
+
   render: function(){
     return (<div className="login-screen">
       <Paper className="login-paper">
-        <form action="/login" method="post">
-
+        <form action="/login" method="post" onSubmit={this.handleLogin}>
           <h4>Login</h4>
+<<<<<<< HEAD
 
           <TextField hintText="yofool@mycrib.com" floatingLabelText="Email"/>
           <TextField hintText="******" floatingLabelText="Password"/> <br/>
 
           <Link to="register">Create Account</Link>
           
+=======
+          <TextField hintText="johndoe@example.com" floatingLabelText="Email" ref="email" />
+          <TextField hintText="******" floatingLabelText="Password" ref="password" />
+          <Link to="register">Create Account</Link>
+>>>>>>> 09a3e4e885f9750f9274cad0124de586bf7d47bd
           <FlatButton label="Login" primary={true} />
-
         </form>
       </Paper>
 
