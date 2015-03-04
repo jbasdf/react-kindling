@@ -6,7 +6,7 @@ import React from "react";
 import {RouteHandler, Link} from "react-router";
 import { Toolbar, ToolbarGroup, Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
-// Components for nav bar.
+
  
 
 

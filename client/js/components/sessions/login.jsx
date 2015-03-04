@@ -15,10 +15,10 @@ module.exports = React.createClass({
           <h4>Login</h4>
 
           <TextField hintText="yofool@mycrib.com" floatingLabelText="Email"/>
-          <TextField hintText="******" floatingLabelText="Password"/>
+          <TextField hintText="******" floatingLabelText="Password"/> <br/>
 
           <Link to="register">Create Account</Link>
-          <FlatButton label="Create Account" />
+          
           <FlatButton label="Login" primary={true} />
 
         </form>
