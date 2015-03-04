@@ -2,11 +2,11 @@
 
 "use strict";
 
-import React from 'react';
-import Link from 'react-router';
+import React      from 'react';
+import { Link }   from 'react-router';
 
-module.exports = React.createClass({
-  render: function () {
+export default React.createClass({
+  render() {
     return (<div>
       <form action="/connect/local" method="post">
         <div className="form-group">

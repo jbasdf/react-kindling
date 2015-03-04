@@ -1,4 +1,5 @@
-import React from "react";
+import React          from "react";
+import assign         from "object-assign";
 
 var { func } = React.PropTypes;
 
@@ -19,7 +20,7 @@ export default function(Component, props, stubs){
     },
 
     getChildContext () {
-      return Object.assign({
+      return assign({
         makePath () {},
         makeHref () {},
         transitionTo () {},

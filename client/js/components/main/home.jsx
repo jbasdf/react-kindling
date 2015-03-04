@@ -4,8 +4,8 @@
 
 import React from 'react';
 
-module.exports = React.createClass({
-  render: function(){
+export default React.createClass({
+  render(){
     return <h2>Home</h2>;
   }
 });

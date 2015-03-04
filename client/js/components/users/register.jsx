@@ -2,12 +2,14 @@
 
 "use strict";
 
-import React from 'react';
-import { Link } from 'react-router';
+import React        from 'react';
+import { Link }     from 'react-router';
+import Validator    from "validator";
+import UserActions  from "../../actions/user";
+import _            from "lodash";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
-import validator from "validator";
 
-module.exports = React.createClass({
+export default React.createClass({
   
   getInitialState(){
     return {
@@ -17,14 +19,14 @@ module.exports = React.createClass({
   
   validateEmail(e){
     return this.validate(
-      validator.isEmail(this.refs.email.getValue()),
+      Validator.isEmail(this.refs.email.getValue()),
       { email: "Invalid email" }
     );
   },
 
   validatePassword(e){
     return this.validate(
-      validator.isLength(this.refs.password.getValue(), 5),
+      Validator.isLength(this.refs.password.getValue(), 5),
       { password: "Password must be at least 5 characters" }
     );
   },
@@ -47,12 +49,22 @@ module.exports = React.createClass({
     }
   },
 
-  handleRegister(){
-    this.validateEmail();
-    this.validatePassword();
-    this.validateConfirmPassword();
-    var email = this.refs.email.getValue();
-    var password = this.refs.password.getValue();
+  validateAll(){
+    return _.every([
+      this.validateEmail(),
+      this.validatePassword(),
+      this.validateConfirmPassword()
+    ], (v)=> { return v });
+  },
+
+  handleRegister(e){
+    e.preventDefault();
+    if(this.validateAll()){
+      UserActions.register({
+        email: this.refs.email.getValue(),
+        password: this.refs.password.getValue()
+      });
+    }
   },
 
   render(){

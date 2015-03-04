@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return <h2>Logout</h2>;
   }

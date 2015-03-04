@@ -2,14 +2,19 @@
 
 "use strict";
 
-import React from "react";
-import { Link } from "react-router";
+import React        from "react";
+import { Link }     from "react-router";
+import UserActions  from "../../actions/user";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
-module.exports = React.createClass({
+export default React.createClass({
 
   handleLogin(e){
     e.preventDefault();
+    UserActions.register({
+      email: this.refs.email.getValue(),
+      password: this.refs.password.getValue()
+    });
   },
 
   render: function(){
