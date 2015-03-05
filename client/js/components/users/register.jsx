@@ -13,7 +13,7 @@ export default React.createClass({
   
   getInitialState(){
     return {
-      validations: {}
+    validations: {}
     };
   },
   
@@ -69,19 +69,6 @@ export default React.createClass({
 
   render(){
     return (<div>
-<<<<<<< HEAD
-      <Paper className="login-paper">
-      <h1><span className="fa fa-sign-in"></span> Signup</h1>
-      <form action="/signup" method="post">
-        <TextField hintText="yofool@mycrib.com" floatingLabelText="Email" ref="email" />
-        <TextField hintText="******" floatingLabelText="Password" ref="password" />
-        <RaisedButton label="Signup" onTouchTap={this.handleClick} primary={true} />
-      </form>
-      <p>
-        Already have an account?     
-        <Link to="login">Login</Link>
-      </p>
-=======
       <Paper>
         <h1><span className="fa fa-sign-in"></span> Signup</h1>
         <form action="/signup" method="post" onSubmit={this.handleRegister}>
@@ -94,7 +81,6 @@ export default React.createClass({
           Already have an account? 
           <Link to="login">Login</Link>
         </p>
->>>>>>> 09a3e4e885f9750f9274cad0124de586bf7d47bd
       </Paper>
     </div>);
   }

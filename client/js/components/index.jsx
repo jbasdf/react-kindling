@@ -7,10 +7,6 @@ import User                 from "../stores/user";
 import {RouteHandler, Link} from "react-router";
 import { Toolbar, ToolbarGroup, Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
-<<<<<<< HEAD
-
- 
-=======
 // Method to retrieve state from stores
 function getState(){
   return {
@@ -18,7 +14,6 @@ function getState(){
     loggedIn: User.loggedIn()
   };
 }
->>>>>>> 09a3e4e885f9750f9274cad0124de586bf7d47bd
 
 export default React.createClass({
 

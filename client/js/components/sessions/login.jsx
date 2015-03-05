@@ -22,18 +22,11 @@ export default React.createClass({
       <Paper className="login-paper">
         <form action="/login" method="post" onSubmit={this.handleLogin}>
           <h4>Login</h4>
-<<<<<<< HEAD
 
-          <TextField hintText="yofool@mycrib.com" floatingLabelText="Email"/>
-          <TextField hintText="******" floatingLabelText="Password"/> <br/>
-
-          <Link to="register">Create Account</Link>
-          
-=======
           <TextField hintText="johndoe@example.com" floatingLabelText="Email" ref="email" />
           <TextField hintText="******" floatingLabelText="Password" ref="password" />
           <Link to="register">Create Account</Link>
->>>>>>> 09a3e4e885f9750f9274cad0124de586bf7d47bd
+
           <FlatButton label="Login" primary={true} />
         </form>
       </Paper>
