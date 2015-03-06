@@ -4,7 +4,7 @@ var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 var User       = require('../app/models/user');
-var secrets = require('./secrets'); // use this one for testing
+var secrets    = require('./secrets'); // use this one for testing
 
 module.exports = function(passport, controllers) {
 
@@ -38,7 +38,7 @@ module.exports = function(passport, controllers) {
     passwordField : 'password',
     passReqToCallback : true
   }, controllers.users.strategyCallback));
-
+  
   // =========================================================================
   // Facebook
   passport.use(new FacebookStrategy({

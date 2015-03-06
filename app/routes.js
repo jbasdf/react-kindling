@@ -9,7 +9,7 @@ module.exports = function(app, passport){
 		if(req.isAuthenticated()){
 			return next();
 		}
-		res.redirect('/');
+		return res.status(422).json({"message" : "Not authorized"});
 	}
 
 	// ====================================================================== 
@@ -37,16 +37,16 @@ module.exports = function(app, passport){
 	app.get('/', controllers.index.index);
 
 	// Login
-	app.post('/login', controllers.strategies.local.create);
-	app.post('/connect/local', controllers.strategies.local.create);
+	app.post('/sessions', controllers.strategies.local.create);
 	app.get('/logout', controllers.strategies.local.destroy);
-	app.delete('/logout', controllers.strategies.local.destroy);
+	app.delete('/sessions', controllers.strategies.local.destroy);
+  
+  app.post('/connect/local', controllers.strategies.local.create);
   app.get('/unlink/local', isAuthenticated, controllers.strategies.local.unlink);
   app.delete('/unlink/local', isAuthenticated, controllers.strategies.local.unlink);
 
   // Sign up
   app.post('/users', controllers.users.create);
-  app.post('/signup', controllers.users.create);
 
 	// Facebook
 	app.get('/auth/facebook', controllers.strategies.facebook.start);

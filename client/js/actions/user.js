@@ -2,24 +2,17 @@
 
 "use strict";
 
-import Dispatcher  from   "../dispatcher";
 import Constants   from   "../constants";
+import Api         from   "./api";
 
 export default {
 
-  login(email, password){
-    Dispatcher.dispatch({
-      action: Constants.LOGIN,
-      email: email,
-      password: password
-    });
+  login(payload){
+    Api.post(Constants.LOGIN, "sessions/", payload);
   },
 
-  register(user) {
-    Dispatcher.dispatch({
-      action: Constants.REGISTER,
-      user: user
-    });
+  register(payload) {
+    Api.post(Constants.REGISTER, "users/", payload);
   }
 
 };

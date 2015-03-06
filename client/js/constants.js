@@ -2,12 +2,15 @@
 
 "use strict";
 
-import keyMirror from "react/lib/keyMirror";
-
-export default keyMirror({
+export default {
   
   // User 
-  LOGIN: null,
-  REGISTER: null
+  LOGIN: "login",
+  REGISTER: "register",
+
+  // Errors
+  TIMEOUT: "timeout",
+  ERROR: "error",
+  NOT_AUTHORIZED: "not_authorized"
   
-});
+};

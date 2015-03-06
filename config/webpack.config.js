@@ -3,6 +3,7 @@ var path                = require('path');
 var ExtractTextPlugin   = require("extract-text-webpack-plugin");
 var settings            = require('./settings.js');
 
+
 module.exports = function(release){
 
   var autoprefix = '{browsers:["Android 2.3", "Android >= 4", "Chrome >= 20", "Firefox >= 24", "Explorer >= 8", "iOS >= 6", "Opera >= 12", "Safari >= 6"]}';
@@ -69,6 +70,7 @@ module.exports = function(release){
       new ExtractTextPlugin("[name].css"),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
+      //new webpack.optimize.CommonsChunkPlugin('init.js') // Use to extract common code from multiple entry points into a single init.js
     ],
     module: {
       preLoaders: [

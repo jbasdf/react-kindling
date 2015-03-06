@@ -50,17 +50,25 @@ module.exports = function(app){
         }), null);
       });
 
-      var scriptPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/app.js';
-      var cssPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/styles.css';
+      var scriptPath, 
+          cssPath, 
+          apiPath;
+
       if(process.env.NODE_ENV === "production"){
         scriptPath = '/app.js';
-        cssPath = '/styles.css'
+        cssPath = '/styles.css';
+        apiPath = '/';
+      } else {
+        scriptPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/app.js';
+        cssPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + '/styles.css';
+        apiPath = 'http://localhost:' + settings.ports.server + '/';
       }
 
       res.render('index.ejs', {
         content: content, 
         scriptPath: scriptPath,
-        cssPath: cssPath
+        cssPath: cssPath,
+        apiPath: apiPath
       });
     }
 

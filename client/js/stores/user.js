@@ -33,6 +33,10 @@ let UserStore = assign({}, EventEmitter.prototype, {
     return _user.email !== undefined;
   },
 
+  token(){
+    return _user.token;
+  },
+
   // Emit Change event
   emitChange(){
     this.emit(CHANGE_EVENT);

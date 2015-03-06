@@ -7,18 +7,15 @@ module.exports = function (app, passport){
     },
 
     // Handle the callback after Twitter has authenticated the user
-    callback: function (req, res){
-      passport.authenticate('twitter', {
-        successRedirect: '/',
-        failureRedirect: '/'
-      })(req, res);
+    callback: function (req, res, next){
+      StrategyCommon.finishAuth('twitter', passport, req, res, next);
     },
 
     unlink: function (req, res){
       var user = req.user;
       user.twitter.token = undefined;
       user.save(function (err){
-        res.redirect('/');
+        res.json({"user": {}});
       });
     },
 

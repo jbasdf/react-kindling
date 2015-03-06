@@ -1,25 +1,23 @@
+var StrategyCommon  = require("./strategy_common");
+
 module.exports = function(app, passport){
   return {
 
     // Send the user to Facebook to be authenticated
-    start: function(req, res){
+    start: function(req, res, next){
       passport.authenticate('facebook', { scope: 'email' })(req, res);
     },
 
     // Handle the callback after Facebook has authenticated the user
     callback: function(req, res){
-      var callback = passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/'
-      });
-      callback(req, res);
+      StrategyCommon.finishAuth('facebook', passport, req, res, next);
     },
 
     unlink: function(req, res){
       var user = req.user;
       user.facebook.token = undefined;
       user.save(function(err){
-        res.redirect('/');
+        res.json({"user": {}});
       });
     },
 

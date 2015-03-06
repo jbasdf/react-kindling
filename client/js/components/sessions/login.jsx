@@ -11,7 +11,7 @@ export default React.createClass({
 
   handleLogin(e){
     e.preventDefault();
-    UserActions.register({
+    UserActions.login({
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
     });

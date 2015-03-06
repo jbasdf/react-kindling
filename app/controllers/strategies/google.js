@@ -1,3 +1,5 @@
+var StrategyCommon  = require("./strategy_common");
+
 module.exports = function(app, passport) {
   return {
     
@@ -7,18 +9,15 @@ module.exports = function(app, passport) {
     },
 
     // Handle the callback after Google has authenticated the user
-    callback: function(req, res) {
-      passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/'
-      })(req, res);
+    callback: function(req, res, next) {
+      StrategyCommon.finishAuth('local-signup', passport, req, res, next);
     },
     
     unlink: function(req, res) {
       var user = req.user;
       user.google.token = undefined;
       user.save(function(err) {
-        res.redirect('/');
+        res.json({"user": {}});
       });
     },
     
