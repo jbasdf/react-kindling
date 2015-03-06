@@ -24,7 +24,7 @@ export default React.createClass({
           <h4>Login</h4>
 
           <TextField hintText="johndoe@example.com" floatingLabelText="Email" ref="email" />
-          <TextField hintText="******" floatingLabelText="Password" ref="password" />
+          <TextField type="password" hintText="******" floatingLabelText="Password" ref="password" />
           <Link to="register">Create Account</Link>
 
           <FlatButton label="Login" primary={true} />
