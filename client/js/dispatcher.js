@@ -1,5 +1,3 @@
-/* @flow weak */
-
 "use strict";
 
 import { Dispatcher } from 'flux';

@@ -1,5 +1,3 @@
-/* @flow weak */
-
 "use strict";
 
 import Constants   from   "../constants";
