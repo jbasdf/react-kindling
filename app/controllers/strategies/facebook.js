@@ -1,4 +1,4 @@
-var StrategyCommon  = require("./strategy_common");
+var StrategyCommon  = require("../../utils/strategy_common");
 
 module.exports = function(app, passport){
   return {
@@ -30,9 +30,7 @@ module.exports = function(app, passport){
           User.findOne({
             'facebook.id': profile.id
           }, function(err, user){
-            if(err){
-              return done(err);
-            }
+            if(err){ return done(err); }
             if(user){
               if(!user.facebook.token){
                 // There is a user id already but no token (user was linked at one point and then removed)

@@ -19,6 +19,7 @@ module.exports = function(app, passport){
 	  fs.readdirSync(dir).forEach(function(file){
 	    if(file.substr(-3) == '.js'){
 	      var name = file.replace('.js', '');
+	      console.log('Loading controller ' + name);
 	      controllers[name] = require(dir + file)(app, passport);
 	    }
 	  }); 

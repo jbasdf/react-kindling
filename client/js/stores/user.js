@@ -4,10 +4,8 @@
 
 import Dispatcher     from "../dispatcher";
 import Constants      from "../constants";
-import EventEmitter   from "events";
+import StoreCommon    from "./store_common";
 import assign         from "object-assign";
-
-const CHANGE_EVENT = 'change';
 
 let _user = {};
 
@@ -22,7 +20,7 @@ function register(user){
 }
 
 // Extend User Store with EventEmitter to add eventing capabilities
-let UserStore = assign({}, EventEmitter.prototype, {
+let UserStore = assign({}, StoreCommon, {
 
   // Return current user
   current(){
@@ -35,21 +33,6 @@ let UserStore = assign({}, EventEmitter.prototype, {
 
   token(){
     return _user.token;
-  },
-
-  // Emit Change event
-  emitChange(){
-    this.emit(CHANGE_EVENT);
-  },
-
-  // Add change listener
-  addChangeListener(callback){
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  // Remove change listener
-  removeChangeListener(callback){
-    this.removeListener(CHANGE_EVENT, callback);
   }
 
 });

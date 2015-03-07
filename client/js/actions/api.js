@@ -25,7 +25,7 @@ function token() {
 }
 
 function makeUrl(part) {
-  return window.API_URL + part;
+  return API_URL + part;
 }
 
 // GET request with a token param
@@ -54,7 +54,7 @@ function post(url, body) {
 function dispatch(key, response) {
   Dispatcher.dispatch({
     action: key,
-    response: response
+    data: response
   });
 }
 

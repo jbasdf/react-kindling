@@ -1,43 +1,27 @@
-/* @flow weak */
-
 "use strict";
 
 import React                from "react";
 import User                 from "../stores/user";
+import StoreKeeper          from "./mixins/store_keeper";
+import Messages             from "./common/messages";
 import {RouteHandler, Link} from "react-router";
 import { Toolbar, ToolbarGroup, Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
-// Method to retrieve state from stores
-function getState(){
-  return {
-    user:     User.current(),
-    loggedIn: User.loggedIn()
-  };
-}
-
 export default React.createClass({
 
-  getInitialState(){
-    return getState();
-  },
+  mixins: [StoreKeeper],
 
-  // Method to update state based upon store changes
-  storeChanged(){
-    this.setState(getState());
-  },
-
-  // Listent for changes in the stores
-  componentDidMount(){
-    User.addChangeListener(this.storeChanged);
-  },
-
-  // Remove change listers from stores
-  componentWillUnmount(){
-    User.removeChangeListener(this.storeChanged);
+  statics: {
+    stores: [User],    // Subscribe to changes in the messages store
+    getState: () => {  // Method to retrieve state from stores
+      return {
+        user:     User.current(),
+        loggedIn: User.loggedIn()
+      };
+    }
   },
 
   render(){
-    
     let loginOrOut = this.state.loggedIn ?
       <Link to="logout">Logout</Link> :
       <Link to="login"><span className="fa fa-user"></span> Login</Link>;
@@ -61,6 +45,7 @@ export default React.createClass({
             {dashboard}
           </ul>
         </header>
+        <Messages/>
         <RouteHandler/>
       </div>
     );

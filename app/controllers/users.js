@@ -1,5 +1,6 @@
 var User            = require("../models/user");
-var StrategyCommon  = require("./strategies/strategy_common");
+var StrategyCommon  = require("../utils/strategy_common");
+
 module.exports = function(app, passport){
 
   return {
