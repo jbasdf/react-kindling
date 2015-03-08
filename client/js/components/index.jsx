@@ -1,53 +1,56 @@
 "use strict";
 
 import React                from "react";
-import User                 from "../stores/user";
-import StoreKeeper          from "./mixins/store_keeper";
 import Messages             from "./common/messages";
-import {RouteHandler, Link} from "react-router";
-import { Toolbar, ToolbarGroup, Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
+import LeftNav              from "./layout/left_nav";
+import {RouteHandler}       from "react-router";
+import { AppCanvas, AppBar, IconButton } from "material-ui";
 
 export default React.createClass({
 
-  mixins: [StoreKeeper],
+  render(){    
 
-  statics: {
-    stores: [User],    // Subscribe to changes in the messages store
-    getState: () => {  // Method to retrieve state from stores
-      return {
-        user:     User.current(),
-        loggedIn: User.loggedIn()
-      };
-    }
-  },
+    let title = "React Kindling";
 
-  render(){
-    let loginOrOut = this.state.loggedIn ?
-      <Link to="logout">Logout</Link> :
-      <Link to="login"><span className="fa fa-user"></span> Login</Link>;
-
-    let register = this.state.loggedIn ?
-      "" :
-      <li><Link to="register">Sign Up</Link></li>;
-
-    let dashboard = this.state.loggedIn ?
-      <li><Link to="dashboard">Dashboard</Link></li> :
-      "" ;
+    let githubButton = (
+      <IconButton
+        className="github-icon-button"
+        iconClassName="muidocs-icon-custom-github"
+        href="https://github.com/jbasdf/react-kindling"
+        linkButton={true} />
+    );
 
     return (
-      <div>
-        <header>
-          <ul>
-            <li>{loginOrOut}</li>
-            {register}
-            <li><Link to="home">Home</Link></li>
-            <li><Link to="connections">Connections</Link></li>
-            {dashboard}
-          </ul>
-        </header>
+      <AppCanvas predefinedLayout={1}>
+
+        <AppBar
+          className="mui-dark-theme"
+          onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+          title={title}
+          zDepth={0}>
+          {githubButton}
+        </AppBar>
+
+        <LeftNav ref="leftNav" />
+
         <Messages/>
-        <RouteHandler/>
-      </div>
+
+        <RouteHandler />
+
+        <div className="footer full-width-section mui-dark-theme">
+          <p>
+            Built by <a href="http://www.atomicjolt.com">Atomic Jolt</a>.
+          </p>
+          {githubButton}
+        </div>
+
+      </AppCanvas>
+
     );
+  },
+
+  _onMenuIconButtonTouchTap: function() {
+    this.refs.leftNav.toggle();
   }
+
 });
