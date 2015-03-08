@@ -9,7 +9,7 @@ module.exports = function(app, passport){
     },
 
     // Handle the callback after Facebook has authenticated the user
-    callback: function(req, res){
+    callback: function(req, res, next){
       StrategyCommon.finishAuth('facebook', passport, req, res, next);
     },
 

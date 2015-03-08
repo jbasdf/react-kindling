@@ -4,7 +4,7 @@ module.exports = function(app, passport){
 
   return {
     
-    create: function(req, res){
+    create: function(req, res, next){
       StrategyCommon.finishAuth('local-login', passport, req, res, next);
     },
 
