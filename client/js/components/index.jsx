@@ -33,9 +33,12 @@ export default React.createClass({
 
         <LeftNav ref="leftNav" />
 
-        <Messages/>
-
-        <RouteHandler />
+        <div className="mui-app-content-canvas page-with-nav">
+          <Messages/>
+          <div className="page-with-nav-content">
+            <RouteHandler />
+          </div>
+        </div>
 
         <div className="footer full-width-section mui-dark-theme">
           <p>
