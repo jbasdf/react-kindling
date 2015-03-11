@@ -72,9 +72,6 @@ function dispatchResponse(key) {
 }
 
 function doRequest(key, url, callback){
-  Dispatcher.dispatch({
-    action: key + "_pending"
-  });
   abortPendingRequests(key);
   let request = _pendingRequests[key] = callback(makeUrl(url));
   request.end(dispatchResponse(key));
