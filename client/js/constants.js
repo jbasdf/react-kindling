@@ -4,7 +4,9 @@ export default {
   
   // User 
   LOGIN: "login",
+  LOGIN_PENDING: "login_pending",
   REGISTER: "register",
+  REGISTER_PENDING: "register_pending",
 
   // Errors
   TIMEOUT: "timeout",
