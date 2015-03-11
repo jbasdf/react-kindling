@@ -2,38 +2,3 @@
 //@import '../../node_modules/font-awesome/scss/font-awesome';
 //@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '_common';
-
-body{
-  min-height: 2000px;
-  padding-top: 0px;
-}
-
-.login-screen{
-	margin: auto;
-}
-
-.login-paper{
-	width: 345px;
-	margin: auto;
-	> div {
-		padding: 23px;
-	}
-}
-
-
-.auth-button{
-	width: 345px;
-	height: 70px;
-	margin: 20px auto;
-	display:block;
-}
-
-.example-button-icon{
-	height: 60px;
-}
-
-.sign-up-button{
-	margin-top: 20px;
-}
-
-

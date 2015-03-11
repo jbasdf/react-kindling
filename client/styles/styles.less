@@ -2,6 +2,36 @@
 @import "./_custom.less"; //Define a custom less file to override any variables defined in scaffolding.less
 @import "../../node_modules/material-ui/src/less/components.less";
 
+@import "./layout/_footer.less";
+@import "./layout/_full_width.less";
+
+body{
+  min-height: 2000px;
+  padding-top: 0px;
+}
+
+a {
+  color: @accent-1-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* App Specific Styles */
+.mui-app-canvas {
+
+  height: 100%;
+
+  .mui-app-bar {
+    .github-icon-button {
+      float: right;
+      margin-right: -16px;
+    }
+  }
+}
+
 .login-container{
   .mui-paper{
     width: 400px;
@@ -13,4 +43,39 @@
   form{
     margin: 20px;
   }
+}
+
+.login-screen{
+  margin: auto;
+}
+
+.login-paper{
+  width: 345px;
+  margin: auto;
+  > div {
+    padding: 23px;
+  }
+}
+
+.register-paper{
+  width: 400px;
+  margin: 5% auto;
+  > div {
+    padding: 23px;
+  }
+}
+
+.auth-button{
+  width: 345px;
+  height: 70px;
+  margin: 20px auto;
+  display:block;
+}
+
+.example-button-icon{
+  height: 60px;
+}
+
+.sign-up-button{
+  margin-top: 20px;
 }

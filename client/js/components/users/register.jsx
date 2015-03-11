@@ -68,7 +68,7 @@ export default React.createClass({
 
   render(){
     return (<div>
-      <Paper className="login-paper">
+      <Paper className="register-paper">
         <h1><span className="fa fa-sign-in"></span> Signup</h1>
         <form action="/signup" method="post" onSubmit={this.handleRegister}>
           <TextField hintText="johndoe@example.com" floatingLabelText="Email" errorText={this.state.validations.email} ref="email" onBlur={this.validateEmail} />
