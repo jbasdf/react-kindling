@@ -16,7 +16,6 @@ export default React.createClass({
   },
   
   validateEmail(e){
-    console.log("This should work");
     return this.validate(
       Validator.isEmail(this.refs.email.getValue()),
       { email: "Invalid email" }
