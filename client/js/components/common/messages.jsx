@@ -4,7 +4,7 @@ import React        from 'react';
 import Messages     from "../../stores/messages";
 import Message      from "./message";
 import StoreKeeper  from "../mixins/store_keeper";
-import { Paper, FlatButton, RaisedButton, FontIcon } from "material-ui";
+import { Toolbar } from "material-ui";
 
 export default React.createClass({
 
@@ -25,12 +25,16 @@ export default React.createClass({
       return <Message>{message}</Message>
     });
 
+    if(messages.length <= 0){
+      return null;
+    }
+    
     return (
-      <Paper className="error-paper">
+      <Toolbar className="error-paper">
         <ul>
           {messages}
         </ul>
-      </Paper>
+      </Toolbar>
     );
   }
 });

@@ -4,11 +4,19 @@ import Dispatcher     from "../dispatcher";
 import Constants      from "../constants";
 import StoreCommon    from "./store_common";
 import assign         from "object-assign";
+import _              from "lodash";
 
 let _messages = [];
 
 function addServerMessage(message){
-  addMessage(JSON.parse(message.text).message);
+  let message = JSON.parse(message.text).message;
+  addMessage(message);
+  setTimeout(function(){
+    _messages = _.reject(_messages, function(msg){
+      return msg == message;
+    });
+    MessagesStore.emitChange();
+  }, 3000);
 }
 
 function addMessage(message){
@@ -16,7 +24,7 @@ function addMessage(message){
 }
 
 // Extend User Store with EventEmitter to add eventing capabilities
-let Store = assign({}, StoreCommon, {
+let MessagesStore = assign({}, StoreCommon, {
 
   // Return current messages
   current(){
@@ -50,11 +58,11 @@ Dispatcher.register(function(payload) {
   }
 
   // If action was responded to, emit change event
-  Store.emitChange();
+  MessagesStore.emitChange();
 
   return true;
 
 });
 
-export default Store;
+export default MessagesStore;
 
