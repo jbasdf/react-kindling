@@ -26,7 +26,7 @@ __Install the dependencies:__
 
 __Configuration:__
 
-Change `config/secrets.js.example` to `config/secrets.js`. Change `sessionSecret` and set your database. If you want
+Change `config/secrets.example.js` to `config/secrets.js`. Change `sessionSecret` and set your database. If you want
 to use Facebook, Twitter or Google for authentication setup your keys and secrets.
 
 __Development mode with livereload:__
