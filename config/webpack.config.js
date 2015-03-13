@@ -9,15 +9,15 @@ module.exports = function(release){
   var autoprefix = '{browsers:["Android 2.3", "Android >= 4", "Chrome >= 20", "Firefox >= 24", "Explorer >= 8", "iOS >= 6", "Opera >= 12", "Safari >= 6"]}';
   var jsLoaders = ['babel-loader?experimental&optional=selfContained'];
   var cssLoaders = ['css-loader', 'autoprefixer-loader?' + autoprefix];
-  
+
   var scssLoaders = cssLoaders.slice(0);
     scssLoaders.push('sass-loader?outputStyle=expanded&includePaths[]=' + (path.resolve(__dirname, './node_modules/bootstrap-sass')));
-  
+
   var lessLoaders = cssLoaders.slice(0);
       lessLoaders.push('less-loader');
 
   var entries;
-  
+
   if(release){
     entries = settings.scripts.paths.entries;
   } else {
@@ -50,7 +50,7 @@ module.exports = function(release){
     },
     cache: true,
     //debug: !release,                          // http://webpack.github.io/docs/configuration.html#debug
-    devtool: release ? false : "source-map",    // http://webpack.github.io/docs/configuration.html#devtool
+    devtool: release ? false : "eval",          // http://webpack.github.io/docs/configuration.html#devtool
     entry: entries,
     stats: {
       colors: true,
