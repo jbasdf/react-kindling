@@ -77,8 +77,7 @@ export default React.createClass({
           <RaisedButton className="sign-up-button"label="Signup" primary={true} />
         </form>
         <p>
-          Already have an account? 
-          <Link to="login">Login</Link>
+          Already have an account? <Link to="login">Login</Link>
         </p>
       </Paper>
     </div>);
