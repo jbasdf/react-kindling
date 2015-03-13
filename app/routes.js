@@ -70,5 +70,10 @@ module.exports = function(app, passport){
 	app.get('/connect/google/callback', controllers.strategies.google.callback);
 	app.get('/unlink/google', isAuthenticated, controllers.strategies.google.unlink);
 
+	app.use('/s3', require('react-s3-uploader/s3router')({
+    bucket: "react-kindling",
+    getFileKeyDir: function(req){return "uploads";}
+	}));
+
 	return controllers;
 };
