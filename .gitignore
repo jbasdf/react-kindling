@@ -8,3 +8,4 @@ npm-debug.log
 s3_website.yml
 
 config/secrets.js
+.DS_Store
