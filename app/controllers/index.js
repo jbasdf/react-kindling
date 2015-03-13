@@ -1,3 +1,5 @@
+"use strict";
+
 var React         = require('react');
 var Router        = require('react-router');
 var UAParser      = require('ua-parser-js');
@@ -5,7 +7,7 @@ var UAParser      = require('ua-parser-js');
 var RouteHandler  = Router.RouteHandler;
 
 var settings      = require('../../config/settings.js');
-var routes        = require('../../client/js/routes.jsx');
+var routes        = require('../../client/js/routes.js');
 
 function deviceType(req){
   // In order to handle "media queries" server-side (preventing FOUT), we parse the user agent string,
@@ -44,14 +46,14 @@ module.exports = function(app){
       // Run the router, and render the result to string
       router.run(function(Handler, state){
         content = React.renderToString(React.createElement(Handler, {
-          routerState: state, 
-          deviceType: deviceType, 
+          routerState: state,
+          deviceType: deviceType,
           environment: "server"
         }), null);
       });
 
-      var scriptPath, 
-          cssPath, 
+      var scriptPath,
+          cssPath,
           apiPath;
 
       if(process.env.NODE_ENV === "production"){
@@ -65,7 +67,7 @@ module.exports = function(app){
       }
 
       res.render('index.ejs', {
-        content: content, 
+        content: content,
         scriptPath: scriptPath,
         cssPath: cssPath,
         apiPath: apiPath
@@ -73,5 +75,5 @@ module.exports = function(app){
     }
 
   };
-  
-}
+
+};
