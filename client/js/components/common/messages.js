@@ -27,7 +27,7 @@ export default React.createClass({
     }
 
     let messages = this.state.messages.map(function(message){
-      return <Message>{message}</Message>
+      return <Message>{message}</Message>;
     });
 
     return (

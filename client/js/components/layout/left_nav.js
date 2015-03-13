@@ -1,3 +1,5 @@
+"use strict";
+
 import React                from "react";
 import User                 from "../../stores/user";
 import StoreKeeper          from "../mixins/store_keeper";
@@ -47,7 +49,7 @@ export default React.createClass({
     var header = <div className="logo" onClick={this._onHeaderClick}>Home</div>;
 
     return (
-      <LeftNav 
+      <LeftNav
         ref="leftNav"
         docked={false}
         isInitiallyOpen={false}
@@ -68,7 +70,7 @@ export default React.createClass({
     for (var i = this.state.menuItems.length - 1; i >= 0; i--) {
       currentItem = this.state.menuItems[i];
       if (currentItem.route && this.isActive(currentItem.route)) return i;
-    };
+    }
   },
 
   _onLeftNavChange: function(e, key, payload) {

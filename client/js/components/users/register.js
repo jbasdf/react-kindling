@@ -84,6 +84,3 @@ export default React.createClass({
   }
 
 });
-
-
-

@@ -3,7 +3,7 @@
 import React from 'react';
 
 export default React.createClass({
-  render: function () {
-    return <h2>Logout</h2>;
+  render(){
+    return <h2>Home</h2>;
   }
 });
