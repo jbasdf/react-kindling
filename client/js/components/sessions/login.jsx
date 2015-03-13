@@ -2,17 +2,54 @@
 
 import React        from "react";
 import { Link }     from "react-router";
+import Validator    from "validator";
 import UserActions  from "../../actions/user";
+import _            from "lodash";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 export default React.createClass({
 
+  getInitialState(){
+    return {
+    validations: {}
+    };
+  },
+
   handleLogin(e){
     e.preventDefault();
-    UserActions.login({
-      email: this.refs.email.getValue(),
-      password: this.refs.password.getValue()
-    });
+    if(this.validateAll()){
+      UserActions.login({
+        email: this.refs.email.getValue(),
+        password: this.refs.password.getValue()
+      });
+    }
+  },
+
+  validateAll(){
+    return _.every([
+      this.validateEmail()
+    ], (v)=> { return v; });
+  },
+
+  validate(isValid, newState, emptyState){
+    if(!isValid){
+      this.setState(
+        Object.assign(this.state.validations, newState)
+      );
+    } else {
+      this.setState(
+        Object.assign(this.state.validations, emptyState)
+      );
+    }
+    return isValid;
+  },
+
+  validateEmail(e){
+    return this.validate(
+      Validator.isEmail(this.refs.email.getValue()),
+      { email: "Invalid email" },
+      { email: "" }
+    );
   },
 
   render: function(){
@@ -21,7 +58,7 @@ export default React.createClass({
         <form action="/login" method="post" onSubmit={this.handleLogin}>
           <h4>Login</h4>
 
-          <TextField hintText="johndoe@example.com" floatingLabelText="Email" ref="email" />
+          <TextField hintText="johndoe@example.com" floatingLabelText="Email" ref="email" onBlur={this.validateEmail} errorText={this.state.validations.email} />
           <TextField type="password" hintText="******" floatingLabelText="Password" ref="password" />
           <Link to="register">Create Account</Link>
 
