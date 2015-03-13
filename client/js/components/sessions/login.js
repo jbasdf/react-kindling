@@ -31,15 +31,11 @@ export default React.createClass({
     ], (v)=> { return v; });
   },
 
-  validate(isValid, newState, emptyState){
+  validate(isValid, invalidState, emptyState){
     if(!isValid){
-      this.setState(
-        Object.assign(this.state.validations, newState)
-      );
+      this.setState(Object.assign(this.state.validations, invalidState));
     } else {
-      this.setState(
-        Object.assign(this.state.validations, emptyState)
-      );
+      this.setState(Object.assign(this.state.validations, emptyState));
     }
     return isValid;
   },
