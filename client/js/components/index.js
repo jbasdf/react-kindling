@@ -8,7 +8,7 @@ import { AppCanvas, AppBar, IconButton } from "material-ui";
 
 export default React.createClass({
 
-  render(){    
+  render(){
 
     let title = "React Kindling";
 

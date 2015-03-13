@@ -1,4 +1,4 @@
-//import expect   from 'expect';
+/*//import expect   from 'expect';
 import React    from 'react';
 import Router   from 'react-router';
 
@@ -15,3 +15,4 @@ describe('default route', function () {
     });
   });
 });
+*/

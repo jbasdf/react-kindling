@@ -1,24 +1,17 @@
-/** @jsx React.DOM */
+var React = require('react');
+var TestUtils = require('react/lib/ReactTestUtils');
+var expect = require('expect');
+var Index = require('../../client/js/components/index');
 
-import React from "react/addons";
-import Index from "../../client/js/components/index";
-import StubRouterContext from "../../utils/stub_router_context";   
-
-jest.dontMock('../../client/js/components/index.jsx');
-
-describe('Index', function() {
+describe('index', function() {
   it('renders the main navigation', function() {
 
     var TestUtils = React.addons.TestUtils;
-    var Subject = StubRouterContext(Index);
-    
-    // Render into the document
-    var index = TestUtils.renderIntoDocument(
-      <Subject />
-    );
 
-    var header = TestUtils.findRenderedDOMComponentWithTag(index, 'header');
-    expect(header.toBeDefined());
- 
+    // Render into the document
+    var index = TestUtils.renderIntoDocument(<Subject />);
+
+    expect(index).toExist();
+
   });
 });
