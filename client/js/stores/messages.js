@@ -8,30 +8,11 @@ import _              from "lodash";
 
 const MessageTimeout = 5000;
 
-let _messages = [];
+var _messages = [];
 var messageCount = 0;
 
-function addServerMessage(message){
-  let message = JSON.parse(message.text).message;
-  let messageId = addMessage(message);
-  setTimeout(function(){
-    removeMessage(messageId)
-  }, MessageTimeout);
-}
-
-function removeMessage(messageId){
-  delete _messages[messageId];
-  MessagesStore.emitChange();
-}
-
-function addMessage(message){
-  messageCount++;
-  _messages[messageCount] = message;
-  return messageCount;
-}
-
 // Extend Message Store with EventEmitter to add eventing capabilities
-let MessagesStore = assign({}, StoreCommon, {
+var MessagesStore = assign({}, StoreCommon, {
 
   // Return current messages
   current(){
@@ -74,6 +55,25 @@ Dispatcher.register(function(payload) {
   return true;
 
 });
+
+
+function addServerMessage(message){
+  let messageId = addMessage(JSON.parse(message.text).message);
+  setTimeout(function(){
+    removeMessage(messageId);
+  }, MessageTimeout);
+}
+
+function removeMessage(messageId){
+  _messages = _.omit(_messages, messageId);
+  MessagesStore.emitChange();
+}
+
+function addMessage(message){
+  messageCount++;
+  _messages[messageCount] = message;
+  return messageCount;
+}
 
 export default MessagesStore;
 
