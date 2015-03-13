@@ -14,21 +14,22 @@ export default React.createClass({
     stores: [Messages],   // Subscribe to changes in the messages store
     getState: () => {     // Method to retrieve state from stores
       return {
-        messages: Messages.current()
+        messages: Messages.current(),
+        hasMessages: Messages.hasMessages()
       };
     }
   },
 
   render() {
 
+    if(!this.state.hasMessages){
+      return null;
+    }
+
     let messages = this.state.messages.map(function(message){
       return <Message>{message}</Message>
     });
 
-    if(messages.length <= 0){
-      return null;
-    }
-    
     return (
       <Toolbar className="error-paper">
         <ul>

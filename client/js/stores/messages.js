@@ -6,29 +6,40 @@ import StoreCommon    from "./store_common";
 import assign         from "object-assign";
 import _              from "lodash";
 
+const MessageTimeout = 5000;
+
 let _messages = [];
+var messageCount = 0;
 
 function addServerMessage(message){
   let message = JSON.parse(message.text).message;
-  addMessage(message);
+  let messageId = addMessage(message);
   setTimeout(function(){
-    _messages = _.reject(_messages, function(msg){
-      return msg == message;
-    });
-    MessagesStore.emitChange();
-  }, 3000);
+    removeMessage(messageId)
+  }, MessageTimeout);
+}
+
+function removeMessage(messageId){
+  delete _messages[messageId];
+  MessagesStore.emitChange();
 }
 
 function addMessage(message){
-  _messages.push(message);
+  messageCount++;
+  _messages[messageCount] = message;
+  return messageCount;
 }
 
-// Extend User Store with EventEmitter to add eventing capabilities
+// Extend Message Store with EventEmitter to add eventing capabilities
 let MessagesStore = assign({}, StoreCommon, {
 
   // Return current messages
   current(){
     return _messages;
+  },
+
+  hasMessages(){
+    return _.keys(_messages).length > 0;
   }
 
 });
