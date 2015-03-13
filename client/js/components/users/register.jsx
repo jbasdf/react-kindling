@@ -8,43 +8,44 @@ import _            from "lodash";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 export default React.createClass({
-  
+
   getInitialState(){
     return {
     validations: {}
     };
   },
-  
+
   validateEmail(e){
     return this.validate(
       Validator.isEmail(this.refs.email.getValue()),
-      { email: "Invalid email" }
+      { email: "Invalid email" },
+      { email: "" }
     );
   },
 
   validatePassword(e){
     return this.validate(
       Validator.isLength(this.refs.password.getValue(), 5),
-      { password: "Password must be at least 5 characters" }
+      { password: "Password must be at least 5 characters" },
+      { password: "" }
     );
   },
 
   validateConfirmPassword(){
     return this.validate(
       (this.refs.password.getValue() == this.refs.confirmPassword.getValue()),
-      { confirmPassword: "Passwords do not match" }
+      { confirmPassword: "Passwords do not match" },
+      { confirmPassword: "" }
     );
   },
 
-  validate(isValid, newState){
+  validate(isValid, invalidState, emptyState){
     if(!isValid){
-      this.setState(
-        Object.assign(this.state.validations, newState)
-      );
-      return false;
+      this.setState(Object.assign(this.state.validations, invalidState));
     } else {
-      return true;
+      this.setState(Object.assign(this.state.validations, emptyState));
     }
+    return isValid;
   },
 
   validateAll(){
@@ -52,7 +53,7 @@ export default React.createClass({
       this.validateEmail(),
       this.validatePassword(),
       this.validateConfirmPassword()
-    ], (v)=> { return v });
+    ], (v)=> { return v; });
   },
 
   handleRegister(e){
