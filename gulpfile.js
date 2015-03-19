@@ -27,16 +27,19 @@ var webpackConfig     = require('./config/webpack.config.js')(release);
 
 
 // Tasks
-gulp.task('default', ['serve:hot', 'serve:sync']);
+gulp.task('default', ['serve:sync', 'serve:hot']);
 
 gulp.task('build', ['clean'], function(callback){
-  var tasks = ['webpack', 'images', 'assets', 'fonts'];
+  var tasks = ['images', 'assets', 'fonts'];
   if(settings.projectType == 'client'){
     tasks.push('html');
   }
-  // if(!release){
-  //   tasks.unshift('hint');
-  // }
+  if(!release){
+    tasks.unshift('hint');
+  } else {
+    // In dev the webpack dev server handles compiling assets, but when we release we need to run webpack
+    tasks.unshift('webpack');
+  }
   runSequence(tasks, callback);
 });
 
@@ -54,7 +57,6 @@ gulp.task('webpack', function(callback){
     if(err){
       throw new gutil.PluginError('webpack', err);
     }
-    gutil.log('webpack', stats.toString({ colors: true }));
     return callback();
   });
 });
@@ -192,7 +194,7 @@ gulp.task('serve:hot', function(){
     //contentBase: 'http://localhost:' + settings.ports.hotPort,
     publicPath: webpackConfig.output.publicPath,
     hot: true,
-    stats: { colors: true },
+    noInfo: true,
     headers: { "Access-Control-Allow-Origin": "*" }
   }).listen(settings.ports.hotPort, 'localhost', function(err, result){
     if(err){

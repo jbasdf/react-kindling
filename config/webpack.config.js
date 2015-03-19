@@ -7,7 +7,7 @@ var settings            = require('./settings.js');
 module.exports = function(release){
 
   var autoprefix = '{browsers:["Android 2.3", "Android >= 4", "Chrome >= 20", "Firefox >= 24", "Explorer >= 8", "iOS >= 6", "Opera >= 12", "Safari >= 6"]}';
-  var jsLoaders = ['babel-loader?experimental&optional=runtime'];
+  var jsLoaders = ['react-hot', 'babel-loader?experimental&optional=runtime'];
   var cssLoaders = ['css-loader', 'autoprefixer-loader?' + autoprefix];
 
   var scssLoaders = cssLoaders.slice(0);
@@ -37,6 +37,7 @@ module.exports = function(release){
   }
 
   return {
+    entry: entries,
     output: {
       path: release ? settings.prodOutput : settings.devOutput,
       filename: '[name].js',
@@ -46,15 +47,12 @@ module.exports = function(release){
     },
     resolve: {
       extensions: ['', '.js', '.json', '.jsx'],
-      modulesDirectories: ["web_modules", "node_modules", "bower_components", "vendor"]
+      modulesDirectories: ["node_modules", "vendor"]
     },
     cache: true,
-    //debug: !release,                          // http://webpack.github.io/docs/configuration.html#debug
     devtool: release ? false : "eval",          // http://webpack.github.io/docs/configuration.html#devtool
-    entry: entries,
     stats: {
-      colors: true,
-      reasons: !release
+      colors: true
     },
     plugins: release ? [
       new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
@@ -62,10 +60,7 @@ module.exports = function(release){
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.AggressiveMergingPlugin(),
-      new ExtractTextPlugin("[name].css"),
-      new webpack.ResolverPlugin(
-        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-      )
+      new ExtractTextPlugin("[name].css")
     ] : [
       new ExtractTextPlugin("[name].css"),
       new webpack.HotModuleReplacementPlugin(),
@@ -78,10 +73,10 @@ module.exports = function(release){
         { test: /\.jsx?$/,            loaders: jsLoaders, exclude: /node_modules/ },
         { test: /\.scss$/,            loader: ExtractTextPlugin.extract('style-loader', scssLoaders.join('!')) },
         { test: /\.css$/ ,            loader: ExtractTextPlugin.extract('style-loader', cssLoaders.join('!')) },
-        { test: /\.less$/ ,           loader: ExtractTextPlugin.extract('style-loader', lessLoaders.join('!')) },
-        { test: /\.html$/,            loader: 'webpack-compile-templates' },
-        { test: /.*\.(gif|png|jpg|jpeg|svg)$/, loaders: ['file?hash=sha512&digest=hex&size=16&name=[hash].[ext]', 'image-webpack-loader?optimizationLevel=7&interlaced=false']},
-        { test: /.*\.(eot|woff2|woff|ttf)/,    loader: 'file?hash=sha512&digest=hex&size=16&name=cd [hash].[ext]'}
+        { test: /\.less$/ ,           loader: ExtractTextPlugin.extract('style-loader', lessLoaders.join('!')) }
+        //{ test: /\.html$/,            loader: 'webpack-compile-templates' }, // Add if you need to compile underscore.js - https://www.npmjs.com/package/webpack-compile-templates
+        //{ test: /.*\.(gif|png|jpg|jpeg|svg)$/, loaders: ['file?hash=sha512&digest=hex&size=16&name=[hash].[ext]', 'image-webpack-loader?optimizationLevel=7&interlaced=false']},
+        //{ test: /.*\.(eot|woff2|woff|ttf)/,    loader: 'file?hash=sha512&digest=hex&size=16&name=cd [hash].[ext]'}
       ]
     }
   };

@@ -2,8 +2,8 @@ var info = require('../package.json');
 var path = require('path');
 
 var clientAppPath = path.join(__dirname, '../client/');
-var devRelativeOutput     = '/build/';
-var prodRelativeOutput    = '/public/';
+var devRelativeOutput     = '/build/dev/';
+var prodRelativeOutput    = '/build/release/';
 var devOutput     = path.join(__dirname, '..' + devRelativeOutput);
 var prodOutput    = path.join(__dirname, '..' + prodRelativeOutput);
 
