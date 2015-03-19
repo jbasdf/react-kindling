@@ -6,6 +6,7 @@ bower_components
 node_modules
 npm-debug.log
 s3_website.yml
+coverage
 
 config/secrets.js
 .DS_Store

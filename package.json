@@ -7,24 +7,7 @@
   "repository": "https://github.com/jbasdf/react_kindling",
   "scripts": {
     "start": "gulp",
-    "test": "jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
-      "react"
-    ],
-    "testFileExtensions": [
-      "es6",
-      "js",
-      "jsx"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "es6"
-    ]
+    "test": "karma start"
   },
   "dependencies": {
     "babel": "^4.3.0",
@@ -60,15 +43,14 @@
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",
     "babel-core": "^4.3.0",
-    "babel-jest": "^4.0.0",
     "babel-loader": "^4.0.0",
     "browser-sync": "^2.0.1",
     "bufferstreams": "^1.0.1",
+    "coveralls": "^2.11.2",
     "css-loader": "^0.9.0",
     "del": "^1.1.1",
     "ecstatic": "^0.5.8",
     "event-stream": "^3.2.1",
-    "expect": "^1.6.0",
     "extend-shallow": "^0.2.0",
     "extract-text-webpack-plugin": "^0.3.8",
     "gulp": "^3.8.10",
@@ -94,23 +76,26 @@
     "gulp-util": "^3.0.1",
     "html-minifier": "^0.7.0",
     "imports-loader": "~0.6.3",
-    "jest": "*",
-    "jest-cli": "^0.4.0",
+    "istanbul": "^0.3.8",
+    "istanbul-instrumenter-loader": "^0.1.2",
+    "jasmine-core": "^2.2.0",
     "jshint": "^2.5.11",
     "jshint-loader": "^0.8.0",
     "jshint-stylish": "^1.0.0",
-    "karma": "^0.12.30",
+    "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
     "karma-cli": "0.0.4",
-    "karma-mocha": "^0.1.10",
+    "karma-coverage": "^0.2.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.1.4",
     "karma-sourcemap-loader": "^0.3.4",
     "karma-webpack": "^1.5.0",
     "less": "^2.4.0",
     "less-loader": "^2.0.0",
-    "material-ui": "~0.7.0",
     "minimist": "^1.1.0",
-    "mocha": "^2.2.1",
     "npm-shrinkwrap": "^5.1.0",
+    "phantomjs": "^1.9.16",
     "protractor": "^1.5.0",
     "psi": "^1.0.5",
     "react-hot-loader": "^1.1.5",

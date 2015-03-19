@@ -1,36 +1,70 @@
-var webpack = require('webpack');
-
-module.exports = function (config) {
+// karma config info: http://karma-runner.github.io/0.12/config/configuration-file.html
+module.exports = function(config) {
   config.set({
 
-    browsers: [ process.env.CONTINUOUS_INTEGRATION ? 'Firefox' : 'Chrome' ],
-
-    singleRun: true,
-
-    frameworks: [ 'mocha' ],
-
     files: [
-      'tests.webpack.js'
+      './specs/spec_helper.js',
+      './specs/**/*.spec.js'        // Use webpack to build each test individually. If changed here, match the change in preprocessors
+      //'./specs/all.js'            // More performant but tests cannot be run individually
     ],
 
+    // Transpile tests with the karma-webpack plugin
     preprocessors: {
-      'tests.webpack.js': [ 'webpack', 'sourcemap' ]
+      './specs/**/*.spec.js': ['webpack']      // Use webpack to build each test individually. If changed here, match the change in files
+      //'./specs/all.js': ['webpack']          // More performant but tests cannot be run individually
     },
 
-    reporters: [ 'dots' ],
+    // Run the tests using the PhantomJS for continuous integration or
+    // switch to Firefox or Chrome to observe the tests. Be sure to install
+    // the launcher for each browser used
+    // npm install --save-dev karma-firefox-launcher
+    // npm install --save-dev karma-chrome-launcher
+    browsers: ['Chrome'], // 'PhantomJS', 'Firefox' 'Chrome'
 
+    // Exit the test runner as well when the test suite returns.
+    singleRun: false,
+    
+    // Use jasmine as the test framework
+    frameworks: ['jasmine'],
+
+    // After running the tests, return the results and generate a
+    // code coverage report.
+    reporters: ['progress', 'coverage', 'dots'],
+
+    // Generate a code coverage report using `lcov` format. Result will be output to coverage/lcov.info
+    // run using `npm coveralls`
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+        { type: 'html', subdir: 'html' }
+      ]
+    },
+
+    // karma-webpack configuration. Load and transpile js and jsx files.
+    // Use istanbul-transformer post loader to generate code coverage report.
     webpack: {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.js$/, loader: 'babel-loader' },
-        ]
+          { test: /\.js$/,   exclude: /node_modules/, loader: "babel-loader" },
+          { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"}
+        ],
+        postLoaders: [{
+          test: /\.jsx?$/,
+          exclude: /(test|node_modules)\//,
+          loader: 'istanbul-instrumenter'
+        }]
+      },
+      resolve: {
+        extensions: ['', '.js', '.jsx']
       }
     },
 
-    webpackServer: {
+     // Turn off verbose logging of webpack compilation.
+    webpackMiddleware: {
       noInfo: true
     }
 
   });
-};
+}

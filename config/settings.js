@@ -38,10 +38,6 @@ module.exports = {
     './server.js',
     './app/**/*'
   ],
-  clientFiles: [
-    './client/js/**/*',
-    './__tests__/**/*'
-  ],
   assets: {
     paths: {
       all: clientAppPath + 'assets/**/*',
@@ -68,7 +64,7 @@ module.exports = {
     paths: {
       all: clientAppPath + 'js/**/*.js',
       entries: {
-        app: clientAppPath + 'js/app.js',
+        app: clientAppPath + 'js/app.jsx',
         styles: clientAppPath + 'styles/styles.js'
       },
       output: {

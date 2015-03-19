@@ -7,7 +7,7 @@ var UAParser      = require('ua-parser-js');
 var RouteHandler  = Router.RouteHandler;
 
 var settings      = require('../../config/settings.js');
-var routes        = require('../../client/js/routes.js');
+var routes        = require('../../client/js/routes.jsx');
 
 function deviceType(req){
   // In order to handle "media queries" server-side (preventing FOUT), we parse the user agent string,

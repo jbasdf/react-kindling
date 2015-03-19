@@ -14,7 +14,6 @@ var replace       = require('gulp-replace');
 var rename        = require('gulp-rename');
 var shell         = require('gulp-shell');
 
-var jest              = require('jest-cli');
 var runSequence       = require('run-sequence');
 var path              = require('path');
 var argv              = require('minimist')(process.argv.slice(2));
@@ -26,9 +25,6 @@ var release           = argv.release || false;
 var settings          = require('./config/settings.js');
 var webpackConfig     = require('./config/webpack.config.js')(release);
 
-var jestConfig        = require('./package.json')['jest'];
-
-jestConfig.rootDir    = __dirname;
 
 // Tasks
 gulp.task('default', ['serve:hot', 'serve:sync']);
@@ -38,9 +34,9 @@ gulp.task('build', ['clean'], function(callback){
   if(settings.projectType == 'client'){
     tasks.push('html');
   }
-  if(!release){
-    tasks.unshift('hint');
-  }
+  // if(!release){
+  //   tasks.unshift('hint');
+  // }
   runSequence(tasks, callback);
 });
 
@@ -189,14 +185,14 @@ gulp.task('serve:sync', ['serve'], function(callback) {
 });
 
 gulp.task('serve:hot', function(){
-  gutil.log('Stargin Webpack hot load server');
+  gutil.log('Starting Webpack hot load server');
   var webpackDevServer = require('webpack-dev-server');
 
   new webpackDevServer(webpack(webpackConfig), {
     //contentBase: 'http://localhost:' + settings.ports.hotPort,
     publicPath: webpackConfig.output.publicPath,
-    noInfo: true,
     hot: true,
+    stats: { colors: true },
     headers: { "Access-Control-Allow-Origin": "*" }
   }).listen(settings.ports.hotPort, 'localhost', function(err, result){
     if(err){
@@ -241,21 +237,4 @@ gulp.task('pagespeed', function(callback) {
     // Use a Google Developer API key if you have one: http://goo.gl/RkN0vE
     // key: 'YOUR_API_KEY'
   }, callback);
-});
-
-// Run tests
-gulp.task('test', function(done) {
-  jest.runCLI({
-    config: jestConfig
-  }, ".", function() {
-    done();
-  });
-});
-
-// Watch for changes and run tests
-gulp.task('tdd', function(done) {
-  gulp.watch([
-    jestConfig.rootDir + "__test__/**/*.js",
-    jestConfig.rootDir + "client/js/**/*"
-  ], ['test']);
 });

@@ -1,16 +1,16 @@
 "use strict";
 
-import React from 'react';
-import Router from 'react-router';
+import React        from 'react';
+import Router       from 'react-router';
 
-import Index from './components/index';
-import Home from './components/main/home';
-import Login from './components/sessions/login';
-import Logout from './components/sessions/logout';
-import Register from './components/users/register';
-import Dashboard from './components/main/dashboard';
-import NotFound from './components/not_found';
-import Connections from './components/users/connections';
+import Index        from './components/index';
+import Home         from './components/main/home';
+import Login        from './components/sessions/login';
+import Logout       from './components/sessions/logout';
+import Register     from './components/users/register';
+import Dashboard    from './components/main/dashboard';
+import NotFound     from './components/not_found';
+import Connections  from './components/users/connections';
 
 var Route         = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;

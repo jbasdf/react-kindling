@@ -4,6 +4,6 @@ import React from 'react';
 
 export default React.createClass({
   render(){
-    return <h2>Not found</h2>;
+    return <h2>Not Found</h2>;
   }
 });

@@ -7,7 +7,7 @@ var settings            = require('./settings.js');
 module.exports = function(release){
 
   var autoprefix = '{browsers:["Android 2.3", "Android >= 4", "Chrome >= 20", "Firefox >= 24", "Explorer >= 8", "iOS >= 6", "Opera >= 12", "Safari >= 6"]}';
-  var jsLoaders = ['babel-loader?experimental&optional=selfContained'];
+  var jsLoaders = ['babel-loader?experimental&optional=runtime'];
   var cssLoaders = ['css-loader', 'autoprefixer-loader?' + autoprefix];
 
   var scssLoaders = cssLoaders.slice(0);
@@ -73,9 +73,6 @@ module.exports = function(release){
       //new webpack.optimize.CommonsChunkPlugin('init.js') // Use to extract common code from multiple entry points into a single init.js
     ],
     module: {
-      preLoaders: [
-        { test: /\.js$/,              loader: 'jshint', exclude: /node_modules/ }
-      ],
       loaders: [
         { test: /\.js$/,              loaders: jsLoaders, exclude: /node_modules/ },
         { test: /\.jsx?$/,            loaders: jsLoaders, exclude: /node_modules/ },
