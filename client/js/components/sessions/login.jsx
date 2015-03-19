@@ -58,7 +58,7 @@ export default React.createClass({
           <TextField type="password" hintText="******" floatingLabelText="Password" ref="password" />
           <Link to="register">Create Account</Link>
 
-          <FlatButton label="Login" primary={true} />
+          <FlatButton className="login-button" label="Login" primary={true} />
         </form>
       </Paper>
 

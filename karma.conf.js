@@ -4,14 +4,14 @@ module.exports = function(config) {
 
     files: [
       './specs/spec_helper.js',
-      './specs/**/*.spec.js'        // Use webpack to build each test individually. If changed here, match the change in preprocessors
-      //'./specs/all.js'            // More performant but tests cannot be run individually
+      //'./specs/**/*.spec.js'        // Use webpack to build each test individually. If changed here, match the change in preprocessors
+      './specs/tests.webpack.js'      // More performant but tests cannot be run individually
     ],
 
     // Transpile tests with the karma-webpack plugin
     preprocessors: {
-      './specs/**/*.spec.js': ['webpack']      // Use webpack to build each test individually. If changed here, match the change in files
-      //'./specs/all.js': ['webpack']          // More performant but tests cannot be run individually
+      //'./specs/**/*.spec.js': ['webpack', 'sourcemap']      // Use webpack to build each test individually. If changed here, match the change in files
+      './specs/tests.webpack.js': ['webpack', 'sourcemap']    // More performant but tests cannot be run individually
     },
 
     // Run the tests using the PhantomJS for continuous integration or
@@ -57,12 +57,18 @@ module.exports = function(config) {
         }]
       },
       resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        modulesDirectories: ["node_modules", "vendor"]
       }
     },
 
-     // Turn off verbose logging of webpack compilation.
+    // Reduce the noise to the console
     webpackMiddleware: {
+      noInfo: true
+    },
+
+    // Reduce the noise to the console
+    webpackServer: {
       noInfo: true
     }
 
