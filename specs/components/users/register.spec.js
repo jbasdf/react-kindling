@@ -52,14 +52,14 @@ describe('register', function() {
 
   it('clears the password error after the user enters a valid password', function(){
 // James
-  });  
+  });
 
   it('ensures the password confirmation matches', function(){
 // Kami - Kenneth
   });
 
   it('Doesn\'t allow form submission if there are validation errors', function(){
-// 
+// David
   });
 
   it('submits the form if all fields are valid', function(){
