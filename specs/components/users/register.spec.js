@@ -1,3 +1,5 @@
+"use strict";
+
 import React              from 'react';
 import TestUtils          from 'react/lib/ReactTestUtils';
 import Register           from '../../../client/js/components/users/register';
@@ -64,7 +66,22 @@ debugger;
   });
 
   it('clears the password error after the user enters a valid password', function(){
-// James
+    let password = Utils.findTextField(textFields, 'password');
+    let passwordTextFields = TestUtils.scryRenderedDOMComponentsWithClass(password, 'mui-text-field-input');
+    let passwordInput = passwordTextFields[0];
+
+    TestUtils.Simulate.blur(passwordInput.getDOMNode());
+
+    expect(password.getDOMNode().className).toContain('mui-has-error');
+    expect(password.getDOMNode().textContent).toContain('Password must be at least 5 characters');
+
+    passwordInput.getDOMNode().value = "aoeuaoeu";
+
+    TestUtils.Simulate.blur(passwordInput.getDOMNode());
+
+    expect(password.getDOMNode().className).not.toContain('mui-has-error');
+    expect(password.getDOMNode().textContent).not.toContain('Password must be at least 5 characters');
+
   });
 
   it('ensures the password confirmation matches', function(){
