@@ -5,6 +5,7 @@ import { Link }     from "react-router";
 import Validator    from "validator";
 import UserActions  from "../../actions/user";
 import _            from "lodash";
+import assign       from "object-assign";
 import { Paper, TextField, FlatButton, RaisedButton, FontIcon } from "material-ui";
 
 export default React.createClass({
@@ -33,9 +34,9 @@ export default React.createClass({
 
   validate(isValid, invalidState, emptyState){
     if(!isValid){
-      this.setState(Object.assign(this.state.validations, invalidState));
+      this.setState(assign(this.state.validations, invalidState));
     } else {
-      this.setState(Object.assign(this.state.validations, emptyState));
+      this.setState(assign(this.state.validations, emptyState));
     }
     return isValid;
   },
