@@ -43,7 +43,20 @@ describe('register', function() {
   });
 
   it('clears the email error after the user enters a valid email', function(){
-// Doug
+    let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
+    TestUtils.Simulate.submit(form);
+
+    let email = Utils.findTextField(textFields, 'email');
+
+    let input = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
+
+    //TestUtils.Simulate.keyDown(input, node, {key: "a"});
+    TestUtils.Simulate.change(input, {target: {value: 'johndoe@example.com'}});
+    TestUtils.Simulate.blur(input);
+debugger; 
+    expect(email.getDOMNode().className).not.toContain('mui-has-error');
+    expect(register.getDOMNode().textContent).not.toContain('Invalid email');
+
   });
 
   it('ensures the password is at least 5 chars', function(){
