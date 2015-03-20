@@ -42,4 +42,28 @@ describe('register', function() {
 
   });
 
+  it('clears the email error after the user enters a valid email', function(){
+// Doug
+  });
+
+  it('ensures the password is at least 5 chars', function(){
+// Joseph
+  });
+
+  it('clears the password error after the user enters a valid password', function(){
+// James
+  });  
+
+  it('ensures the password confirmation matches', function(){
+// Kami - Kenneth
+  });
+
+  it('Doesn\'t allow form submission if there are validation errors', function(){
+// 
+  });
+
+  it('submits the form if all fields are valid', function(){
+//Joel
+  });
+
 });
