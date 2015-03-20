@@ -1,5 +1,12 @@
 // karma config info: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function(config) {
+  var postLoadersLoader = 'babel-loader';
+  function isCoverage(argument) {
+    return argument === '--coverage';
+  }
+  if (process.argv.some(isCoverage)) {
+    postLoadersLoader = 'istanbul-instrumenter';
+  }
   config.set({
 
     files: [
@@ -23,7 +30,7 @@ module.exports = function(config) {
 
     // Exit the test runner as well when the test suite returns.
     singleRun: false,
-    
+
     // Use jasmine as the test framework
     frameworks: ['jasmine'],
 
@@ -53,7 +60,7 @@ module.exports = function(config) {
         postLoaders: [{
           test: /\.jsx?$/,
           exclude: /(test|node_modules)\//,
-          loader: 'istanbul-instrumenter'
+          loader: postLoadersLoader
         }]
       },
       resolve: {
@@ -73,4 +80,4 @@ module.exports = function(config) {
     }
 
   });
-}
+};
