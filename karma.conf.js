@@ -8,21 +8,20 @@ module.exports = function(config) {
   // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
   var reporters = ['spec'];
 
-  var webpackServerConfig = {
-    noInfo: true,
-    stats: {
-      colors: true
-    }
-  };
-
   if(process.argv.some(isCoverage)){
     reporters.push('coverage');
   }
 
   var testConfig = {
 
+    // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
+
+    // How long will Karma wait for a message from a browser before disconnecting from it (in ms)
     browserNoActivityTimeout: 60000,
+
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
     // web server port
     port: 9876,
@@ -39,15 +38,21 @@ module.exports = function(config) {
       './specs/tests.webpack.js': ['webpack', 'sourcemap']    // More performant but tests cannot be run individually
     },
 
-    // Run the tests using the PhantomJS for continuous integration or
-    // switch to Firefox or Chrome to observe the tests. Be sure to install
-    // the launcher for each browser used
-    // npm install --save-dev karma-firefox-launcher
-    // npm install --save-dev karma-chrome-launcher
-    browsers: ['Chrome'], // 'PhantomJS', 'Firefox' 'Chrome'
+    // Run the tests using any of the following browsers
+    // - Chrome         npm install --save-dev karma-chrome-launcher
+    // - ChromeCanary
+    // - Firefox        npm install --save-dev karma-firefox-launcher
+    // - Opera          npm install --save-dev karma-opera-launcher
+    // - Safari         npm install --save-dev karma-safari-launcher  (only Mac)
+    // - PhantomJS      npm install --save-dev karma-phantomjs-launcher
+    // - IE             npm install karma-ie-launcher (only Windows)
+    browsers: ['Chrome'],
 
     // Exit the test runner as well when the test suite returns.
     singleRun: false,
+
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
 
     // Use jasmine as the test framework
     frameworks: ['jasmine'],
@@ -71,14 +76,17 @@ module.exports = function(config) {
     },
 
     // Reduce the noise to the console
-    webpackMiddleware: webpackServerConfig,
-    webpackServer: webpackServerConfig,
-    
-    colors: true,
-    autoWatch: true
+    webpackMiddleware: {
+      noInfo: true,
+      stats: {
+        colors: true
+      }
+    }
+
   };
 
 
+  // Generate code coverage report if --coverage is specified
   if(process.argv.some(isCoverage)) {
     // Generate a code coverage report using `lcov` format. Result will be output to coverage/lcov.info
     // run using `npm coveralls`
