@@ -5,6 +5,7 @@ import TestUtils          from 'react/lib/ReactTestUtils';
 import Register           from '../../../client/js/components/users/register';
 import StubRouterContext  from '../../support/stub_router_context';
 import Utils              from '../../support/utils';
+import UserActions        from '../../../client/js/actions/user';
 
 describe('register', function() {
   var register;
@@ -28,6 +29,9 @@ describe('register', function() {
 
     let password = Utils.findTextField(textFields, 'password');
     expect(password).toBeDefined();
+
+    let confirmPassword = Utils.findTextField(textFields, 'confirm password');
+    expect(confirmPassword).toBeDefined();
   });
 
   it('submits the login via the button', function(){
@@ -94,10 +98,33 @@ describe('register', function() {
 
   it('Doesn\'t allow form submission if there are validation errors', function(){
 // David
+    // hint: same test as below, but with an invalid email or confirm password input doesn't match, etc.
   });
 
   it('submits the form if all fields are valid', function(){
-//Joel
+    //arrange
+    let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
+    let password = Utils.findTextField(textFields, 'password');
+    let passwordInput = TestUtils.findRenderedDOMComponentWithClass(password, 'mui-text-field-input');
+    let confirmPassword = Utils.findTextField(textFields, 'confirm password');
+    let confirmPasswordInput = TestUtils.findRenderedDOMComponentWithClass(confirmPassword, 'mui-text-field-input');
+    let email = Utils.findTextField(textFields, 'email');
+    let emailInput = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
+    let expectedRegisterObject ={
+      email: "johndoe@example.com",
+      password: "aoeuaoeu"
+    };
+
+    emailInput.getDOMNode().value = expectedRegisterObject.email;
+    passwordInput.getDOMNode().value = expectedRegisterObject.password;
+    confirmPasswordInput.getDOMNode().value = expectedRegisterObject.password;
+    spyOn(UserActions, 'register');
+    
+    //act
+    TestUtils.Simulate.submit(form);
+  
+    //assert
+    expect(UserActions.register).toHaveBeenCalledWith(expectedRegisterObject);
   });
 
 });
