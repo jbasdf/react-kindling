@@ -2,7 +2,9 @@
   "globalstrict": true,
   "globals": {
     "require": false,
-    "__dirname": false
+    "__dirname": false,
+    "setTimeout": false,
+    "GlobalSettings": false
   },
   "esnext" : true
 }

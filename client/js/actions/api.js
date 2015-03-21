@@ -23,7 +23,7 @@ function token() {
 }
 
 function makeUrl(part) {
-  return API_URL + part;
+  return GlobalSettings.apiUrl + part;
 }
 
 // GET request with a token param

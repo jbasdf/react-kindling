@@ -50,6 +50,8 @@ production files will be in /public.
 ### Client Server
 Open up settings. Change 'projectType' to 'client-server'. 
 
+Pass values from the server to the client via `GlobalSettings`. This code can be found in index.ejs.
+
 ## Testing
 React Kindling uses [Jest](https://facebook.github.io/jest/) for tests
 
