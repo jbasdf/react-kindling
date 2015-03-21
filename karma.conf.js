@@ -1,13 +1,31 @@
 // karma config info: http://karma-runner.github.io/0.12/config/configuration-file.html
 module.exports = function(config) {
-  var postLoadersLoader = 'babel-loader';
+  
   function isCoverage(argument) {
     return argument === '--coverage';
   }
-  if (process.argv.some(isCoverage)) {
-    postLoadersLoader = 'istanbul-instrumenter';
+  
+  // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
+  var reporters = ['spec'];
+
+  var webpackServerConfig = {
+    noInfo: true,
+    stats: {
+      colors: true
+    }
+  };
+
+  if(process.argv.some(isCoverage)){
+    reporters.push('coverage');
   }
-  config.set({
+
+  var testConfig = {
+
+    captureTimeout: 60000,
+    browserNoActivityTimeout: 60000,
+
+    // web server port
+    port: 9876,
 
     files: [
       './specs/spec_helper.js',
@@ -34,34 +52,17 @@ module.exports = function(config) {
     // Use jasmine as the test framework
     frameworks: ['jasmine'],
 
-    // After running the tests, return the results and generate a
-    // code coverage report.
-    reporters: ['progress', 'coverage', 'dots'],
-
-    // Generate a code coverage report using `lcov` format. Result will be output to coverage/lcov.info
-    // run using `npm coveralls`
-    coverageReporter: {
-      dir: 'coverage/',
-      reporters: [
-        { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
-        { type: 'html', subdir: 'html' }
-      ]
-    },
+    reporters: reporters,
 
     // karma-webpack configuration. Load and transpile js and jsx files.
     // Use istanbul-transformer post loader to generate code coverage report.
     webpack: {
-      devtool: 'inline-source-map',
+      devtool: 'eval',
       module: {
         loaders: [
           { test: /\.js$/,   exclude: /node_modules/, loader: "babel-loader" },
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"}
-        ],
-        postLoaders: [{
-          test: /\.jsx?$/,
-          exclude: /(test|node_modules)\//,
-          loader: postLoadersLoader
-        }]
+          { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" }
+        ]
       },
       resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -70,14 +71,31 @@ module.exports = function(config) {
     },
 
     // Reduce the noise to the console
-    webpackMiddleware: {
-      noInfo: true
-    },
+    webpackMiddleware: webpackServerConfig,
+    webpackServer: webpackServerConfig,
+    
+    colors: true,
+    autoWatch: true
+  };
 
-    // Reduce the noise to the console
-    webpackServer: {
-      noInfo: true
-    }
 
-  });
+  if(process.argv.some(isCoverage)) {
+    // Generate a code coverage report using `lcov` format. Result will be output to coverage/lcov.info
+    // run using `npm coveralls`
+    testConfig['webpack']['module']['postLoaders'] = [{
+      test: /\.jsx?$/,
+      exclude: /(test|node_modules)\//,
+      loader: 'istanbul-instrumenter'
+    }];
+
+    testConfig['coverageReporter'] = {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+        { type: 'html', subdir: 'html' }
+      ]
+    };
+  }
+
+  config.set(testConfig);
 };

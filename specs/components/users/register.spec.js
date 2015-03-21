@@ -30,35 +30,40 @@ describe('register', function() {
     expect(password).toBeDefined();
   });
 
-  it('outputs a validation error if no email is provided', function(){
+  it('submits the login via the button', function(){
+    // In the application clicking the button submits the form even though it's not a submit button
+    // Need to figure out why and then add an appropriate test for submitting via the button
     //let button = TestUtils.findRenderedDOMComponentWithClass(register, 'sign-up-button');
     //This only triggers the onTouchTap event for the button, not the form submit.
     //TestUtils.Simulate.click(button.getDOMNode());
+  });
 
+  it('outputs a validation error if no email is provided', function(){
     let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
     TestUtils.Simulate.submit(form);
 
     let email = Utils.findTextField(textFields, 'email');
     expect(email.getDOMNode().className).toContain('mui-has-error');
     expect(register.getDOMNode().textContent).toContain('Invalid email');
-
   });
 
   it('clears the email error after the user enters a valid email', function(){
+
+    // Submit the form to put it into an invalid state
     let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
     TestUtils.Simulate.submit(form);
 
+    // Find the email material ui component and it's input field
     let email = Utils.findTextField(textFields, 'email');
+    let emailInput = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
 
-    let input = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
+    // Set a valid email and blur the field
+    emailInput.getDOMNode().value = "johndoe@example.com";
+    TestUtils.Simulate.blur(emailInput);
 
-    //TestUtils.Simulate.keyDown(input, node, {key: "a"});
-    TestUtils.Simulate.change(input, {target: {value: 'johndoe@example.com'}});
-    TestUtils.Simulate.blur(input);
-debugger; 
+    // Test to make sure the email is now valid
     expect(email.getDOMNode().className).not.toContain('mui-has-error');
     expect(register.getDOMNode().textContent).not.toContain('Invalid email');
-
   });
 
   it('ensures the password is at least 5 chars', function(){
@@ -67,9 +72,8 @@ debugger;
 
   it('clears the password error after the user enters a valid password', function(){
     let password = Utils.findTextField(textFields, 'password');
-    let passwordTextFields = TestUtils.scryRenderedDOMComponentsWithClass(password, 'mui-text-field-input');
-    let passwordInput = passwordTextFields[0];
-
+    let passwordInput = TestUtils.findRenderedDOMComponentWithClass(password, 'mui-text-field-input');
+    
     TestUtils.Simulate.blur(passwordInput.getDOMNode());
 
     expect(password.getDOMNode().className).toContain('mui-has-error');
