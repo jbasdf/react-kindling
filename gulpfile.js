@@ -204,9 +204,14 @@ gulp.task('serve:hot', function(){
   });
 });
 
+gulp.task('release', function(callback){
+  release = true;
+  var tasks = ['build', 'deploy:amazon'];
+  runSequence(tasks, callback);
+});
+
 // Deploy to Amazon S3
 gulp.task('deploy:amazon', shell.task([
-  'gulp build --release',
   's3_website push'
 ]));
 
