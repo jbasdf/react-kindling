@@ -72,11 +72,13 @@ module.exports = function(release){
         { test: /\.jsx?$/,            loaders: jsLoaders, exclude: /node_modules/ },
         { test: /\.scss$/,            loader: ExtractTextPlugin.extract('style-loader', scssLoaders.join('!')) },
         { test: /\.css$/ ,            loader: ExtractTextPlugin.extract('style-loader', cssLoaders.join('!')) },
-        { test: /\.less$/ ,           loader: ExtractTextPlugin.extract('style-loader', lessLoaders.join('!')) }
+        { test: /\.less$/ ,           loader: ExtractTextPlugin.extract('style-loader', lessLoaders.join('!')) },
         //{ test: /\.html$/,            loader: 'webpack-compile-templates' }, // Add if you need to compile underscore.js - https://www.npmjs.com/package/webpack-compile-templates
         //{ test: /.*\.(gif|png|jpg|jpeg|svg)$/, loaders: ['file?hash=sha512&digest=hex&size=16&name=[hash].[ext]', 'image-webpack-loader?optimizationLevel=7&interlaced=false']},
         //{ test: /.*\.(eot|woff2|woff|ttf)/,    loader: 'file?hash=sha512&digest=hex&size=16&name=cd [hash].[ext]'}
+        { test: /\.(png|woff|woff2|eot|ttf|svg)($|\?)/, loader: 'url-loader' }
       ]
+      
     }
   };
 };

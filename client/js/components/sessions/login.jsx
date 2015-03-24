@@ -65,21 +65,21 @@ export default React.createClass({
 
       <div className="button-example-container">
         <RaisedButton className="auth-button" linkButton={true} href="/auth/facebook" secondary={true}>
-          <FontIcon className="muidocs-icon-custom-facebook example-button-icon"/>
+          <FontIcon className="icon-facebook example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Facebook</span>
         </RaisedButton>
       </div>
 
       <div className="button-example-container">
         <RaisedButton className="auth-button" linkButton={true} href="/auth/twitter" secondary={true}>
-          <FontIcon className="muidocs-icon-custom-twitter example-button-icon"/>
+          <FontIcon className="icon-twitter example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Twitter</span>
         </RaisedButton>
       </div>
 
       <div className="button-example-container">
         <RaisedButton className="auth-button" linkButton={true} href="/auth/google" secondary={true}>
-          <FontIcon className="muidocs-icon-custom-google example-button-icon"/>
+          <FontIcon className="icon-google example-button-icon"/>
           <span className="mui-raised-button-label example-icon-button-label">Google+</span>
         </RaisedButton>
       </div>
