@@ -41,6 +41,8 @@ app.use(compression());
 // ====================================================================== 
 // Serve static assets in the public directory. In production serve assets in build as well
 
+app.use(express.favicon());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 if (process.env.NODE_ENV === "production"){
