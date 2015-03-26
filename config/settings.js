@@ -1,11 +1,15 @@
-var info = require('../package.json');
-var path = require('path');
+var info      = require('../package.json');
+var path      = require('path');
+var secrets   = require('./secrets.js');
 
 var clientAppPath = path.join(__dirname, '../client/');
 var devRelativeOutput     = '/build/dev/';
 var prodRelativeOutput    = '/build/release/';
 var devOutput     = path.join(__dirname, '..' + devRelativeOutput);
 var prodOutput    = path.join(__dirname, '..' + prodRelativeOutput);
+
+var serverPort = 8888;
+var hotPort = 8080;
 
 module.exports = {
   title: info.title,
@@ -28,10 +32,14 @@ module.exports = {
   // Used by pageSpeed. This should be the url of your production server
   applicationUrl: 'http://www.example.com',
 
+  // Dev urls
+  devApplicationUrl: secrets.devApplicationUrl || 'http://localhost:' + serverPort,
+  devAssetsUrl: secrets.devAssetsUrl || 'http://localhost:' + hotPort,
+
   ports: {
-    server: 8888,
+    server: serverPort,
     reloadProxy: 5000,
-    hotPort: 8080,
+    hotPort: hotPort,
     livereload: 35729
   },
   appFiles: [

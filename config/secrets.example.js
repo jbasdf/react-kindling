@@ -4,6 +4,9 @@ module.exports = {
 
   'sessionSecret' : 'Generate a secure session secret and put it here.',
 
+  'devApplicationUrl': 'https://myserversubdomain.ngrok.com',
+  'devAssetsUrl': 'https://myassetssubdomain.ngrok.com',
+
   'facebookAuth' : { // Get this from https://developers.facebook.com
     'clientID'    : 'your-secret-clientID-here', // your App ID
     'clientSecret'  : 'your-client-secret-here', // your App Secret

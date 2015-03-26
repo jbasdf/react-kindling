@@ -48,9 +48,24 @@ will be built into a client only html/js/css application. The development files 
 production files will be in /public.
 
 ### Client Server
-Open up settings. Change 'projectType' to 'client-server'. 
+Open up settings. 
+
+Change 'projectType' to 'client-server'.
+Set applicationUrl to your domain.
 
 Pass values from the server to the client via `GlobalSettings`. This code can be found in index.ejs.
+
+####ngrok
+Ngrok makes it easy to provide a public url to an application running on your local machine. This
+comes in handy when dealing with OAuth providers that don't permit localhost. Install ngrok - https://ngrok.com/
+and then run two instances one for the node server and another for the webpack server:
+
+`ngrok --subdomain myserversubdomain 8888`
+`ngrok --subdomain myassetssubdomain 8080`
+
+Change the subdomains to be a value you prefer and then update applicationUrl and assetsUrl 
+in secrets.js to match your changes.
+
 
 ## Testing
 React Kindling uses [Jest](https://facebook.github.io/jest/) for tests

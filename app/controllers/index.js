@@ -61,9 +61,9 @@ module.exports = function(app){
         cssPath = '/styles.css';
         apiPath = '/';
       } else {
-        scriptPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + 'app.js';
-        cssPath = 'http://localhost:' + settings.ports.hotPort + settings.devRelativeOutput + 'styles.css';
-        apiPath = 'http://localhost:' + settings.ports.server + '/';
+        scriptPath = settings.devAssetsUrl + settings.devRelativeOutput + 'app.js';
+        cssPath = settings.devAssetsUrl + settings.devRelativeOutput + 'styles.css';
+        apiPath = settings.devApplicationUrl + '/';
       }
 
       res.render('index.ejs', {
