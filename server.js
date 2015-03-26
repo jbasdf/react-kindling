@@ -64,6 +64,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // ====================================================================== 
+// Configure session
+app.use(session({ secret: secrets.sessionSecret }));
+
+// ====================================================================== 
 // Configure views and routes
 
 app.set('views', __dirname + '/app/views');
@@ -71,9 +75,8 @@ var controllers = require('./app/routes.js')(app, passport);
 
 // ====================================================================== 
 // Setup passport
-
 passportConfig(passport, controllers);
-app.use(session({ secret: secrets.sessionSecret }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash()); // use connect-flash for flash messages stored in session
