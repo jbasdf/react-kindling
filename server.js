@@ -10,6 +10,7 @@ var bodyParser    = require('body-parser');
 var session       = require('express-session');
 var fs            = require('fs');
 var passport      = require('passport');
+var favicon       = require('serve-favicon');
 
 var settings        = require('./config/settings.js');
 var secrets         = require('./config/secrets.js');
@@ -40,10 +41,9 @@ app.use(compression());
 
 // ====================================================================== 
 // Serve static assets in the public directory. In production serve assets in build as well
+//app.use(favicon(path.join(__dirname, '/app/assets/favicon.ico')));
 
-app.use(express.favicon());
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app/assets')));
 
 if (process.env.NODE_ENV === "production"){
   // In production serve a static directory for the webpack-compiled js and css.
