@@ -4,8 +4,8 @@ module.exports = function (app, passport){
   return {
 
     // Send the user to Twitter to be authenticated
-    start: function (req, res){
-      passport.authenticate('twitter', { scope: 'email' })(req, res);
+    start: function (req, res, next){
+      passport.authenticate('twitter', { scope: 'email' })(req, res, next);
     },
 
     // Handle the callback after Twitter has authenticated the user
