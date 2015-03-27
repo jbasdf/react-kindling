@@ -93,7 +93,35 @@ describe('register', function() {
   });
 
   it('ensures the password confirmation matches', function(){
-// Kami - Kenneth
+  	let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
+    let password = Utils.findTextField(textFields, 'password');
+    let passwordInput = TestUtils.findRenderedDOMComponentWithClass(password, 'mui-text-field-input');
+    let confirmPassword = Utils.findTextField(textFields, 'confirm password');
+    let confirmPasswordInput = TestUtils.findRenderedDOMComponentWithClass(confirmPassword, 'mui-text-field-input');
+    let email = Utils.findTextField(textFields, 'email');
+    let emailInput = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
+    let expectedRegisterObject ={
+      email: "johndoe@example.com",
+      password: "aoeuaoeu",
+      badpassword: "asdfasdf"
+    };
+
+    emailInput.getDOMNode().value = expectedRegisterObject.email;
+    passwordInput.getDOMNode().value = expectedRegisterObject.password;
+    confirmPasswordInput.getDOMNode().value = expectedRegisterObject.badpassword;
+    TestUtils.Simulate.blur(confirmPasswordInput);
+
+    // Test to make sure the password is not valid
+    expect(confirmPassword.getDOMNode().className).toContain('mui-has-error');
+    expect(register.getDOMNode().textContent).toContain('Passwords do not match');
+
+    confirmPasswordInput.getDOMNode().value = expectedRegisterObject.password;
+
+    TestUtils.Simulate.blur(confirmPasswordInput.getDOMNode());
+
+    // Test to make sure the password is now valid
+    expect(confirmPassword.getDOMNode().className).not.toContain('mui-has-error');
+    expect(register.getDOMNode().textContent).not.toContain('Passwords do not match');
   });
 
   it('Doesn\'t allow form submission if there are validation errors', function(){
