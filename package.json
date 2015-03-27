@@ -21,7 +21,7 @@
     "cors": "^2.5.2",
     "ejs": "~0.8.5",
     "express": "^4.3.2",
-    "express-session": "~1.0.0",
+    "express-session": "~1.10.4",
     "flux": "^2.0.1",
     "font-awesome": "^4.2.0",
     "jquery": "^2.1.3",
