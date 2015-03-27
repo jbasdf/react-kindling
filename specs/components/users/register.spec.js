@@ -71,7 +71,14 @@ describe('register', function() {
   });
 
   it('ensures the password is at least 5 chars', function(){
-// Joseph
+    let password = Utils.findTextField(textFields, 'password');
+    let passwordInput = TestUtils.findRenderedDOMComponentWithTag(password, 'input');
+
+    passwordInput.getDOMNode().value = "test";
+    TestUtils.Simulate.blur(passwordInput.getDOMNode());
+
+    expect(register.getDOMNode().textContent).toContain("at least 5 characters");
+    
   });
 
   it('clears the password error after the user enters a valid password', function(){
