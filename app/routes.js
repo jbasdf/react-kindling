@@ -3,7 +3,7 @@ var path          = require('path');
 
 module.exports = function(app, passport){
 
-	// ====================================================================== 
+	// ======================================================================
 	// Method to ensure user is logged in
 	function isAuthenticated(req, res, next){
 		if(req.isAuthenticated()){
@@ -12,7 +12,7 @@ module.exports = function(app, passport){
 		return res.status(422).json({"message" : "Not authorized"});
 	}
 
-	// ====================================================================== 
+	// ======================================================================
 	// Load Controllers
 	function loadControllers(dir){
 	  var controllers = {};
@@ -22,7 +22,7 @@ module.exports = function(app, passport){
 	      console.log('Loading controller ' + name);
 	      controllers[name] = require(dir + file)(app, passport);
 	    }
-	  }); 
+	  });
 	  return controllers;
 	}
 
@@ -31,7 +31,7 @@ module.exports = function(app, passport){
 
 	// ======================================================================
 	//
-	// Routes	
+	// Routes
 	//
 
 	// Home
@@ -41,7 +41,7 @@ module.exports = function(app, passport){
 	app.post('/sessions', controllers.strategies.local.create);
 	app.get('/logout', controllers.strategies.local.destroy);
 	app.delete('/sessions', controllers.strategies.local.destroy);
-  
+
   app.post('/connect/local', controllers.strategies.local.create);
   app.get('/unlink/local', isAuthenticated, controllers.strategies.local.unlink);
   app.delete('/unlink/local', isAuthenticated, controllers.strategies.local.unlink);

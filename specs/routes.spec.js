@@ -14,3 +14,13 @@ describe('default route', function () {
     });
   });
 });
+
+describe('about route', function () {
+  it('renders about', function (done) {
+    Router.run(routes, '/about', function (Handler, state){
+      var html = React.renderToString(<Handler/>);
+      expect(html).toMatch(/About/);
+      done();
+    });
+  });
+});
