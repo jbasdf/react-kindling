@@ -78,13 +78,13 @@ describe('register', function() {
     TestUtils.Simulate.blur(passwordInput.getDOMNode());
 
     expect(register.getDOMNode().textContent).toContain("at least 5 characters");
-    
+
   });
 
   it('clears the password error after the user enters a valid password', function(){
     let password = Utils.findTextField(textFields, 'password');
     let passwordInput = TestUtils.findRenderedDOMComponentWithClass(password, 'mui-text-field-input');
-    
+
     TestUtils.Simulate.blur(passwordInput.getDOMNode());
 
     expect(password.getDOMNode().className).toContain('mui-has-error');
@@ -132,8 +132,32 @@ describe('register', function() {
   });
 
   it('Doesn\'t allow form submission if there are validation errors', function(){
-// David
-    // hint: same test as below, but with an invalid email or confirm password input doesn't match, etc.
+    //arrange
+    let form = TestUtils.findRenderedDOMComponentWithTag(register, 'form');
+    let password = Utils.findTextField(textFields, 'password');
+    let passwordInput = TestUtils.findRenderedDOMComponentWithClass(password, 'mui-text-field-input');
+    let confirmPassword = Utils.findTextField(textFields, 'confirm password');
+    let confirmPasswordInput = TestUtils.findRenderedDOMComponentWithClass(confirmPassword, 'mui-text-field-input');
+    let email = Utils.findTextField(textFields, 'email');
+    let emailInput = TestUtils.findRenderedDOMComponentWithTag(email, 'input');
+    let badRegisterObject ={
+      email: "johndoe",
+      password: "asdf"
+    };
+
+    emailInput.getDOMNode().value = badRegisterObject.email;
+    passwordInput.getDOMNode().value = badRegisterObject.password;
+    confirmPasswordInput.getDOMNode().value = badRegisterObject.password;
+    spyOn(UserActions, 'register');
+
+    //act
+    TestUtils.Simulate.submit(form);
+
+    //assert
+    expect(email.getDOMNode().className).toContain('mui-has-error');
+    expect(register.getDOMNode().textContent).toContain('Invalid email');
+    expect(register.getDOMNode().textContent).toContain("at least 5 characters");
+    expect(UserActions.register).not.toHaveBeenCalledWith(badRegisterObject);
   });
 
   it('submits the form if all fields are valid', function(){
@@ -154,10 +178,10 @@ describe('register', function() {
     passwordInput.getDOMNode().value = expectedRegisterObject.password;
     confirmPasswordInput.getDOMNode().value = expectedRegisterObject.password;
     spyOn(UserActions, 'register');
-    
+
     //act
     TestUtils.Simulate.submit(form);
-  
+
     //assert
     expect(UserActions.register).toHaveBeenCalledWith(expectedRegisterObject);
   });
