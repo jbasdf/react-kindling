@@ -13,7 +13,9 @@ var gulpif        = require('gulp-if');
 var replace       = require('gulp-replace');
 var rename        = require('gulp-rename');
 var shell         = require('gulp-shell');
+var nodemon       = require('gulp-nodemon');
 
+var webpackDevServer  = require('webpack-dev-server');
 var runSequence       = require('run-sequence');
 var path              = require('path');
 var argv              = require('minimist')(process.argv.slice(2));
@@ -25,9 +27,8 @@ var release           = argv.release || false;
 var settings          = require('./config/settings.js');
 var webpackConfig     = require('./config/webpack.config.js')(release);
 
-
 // Tasks
-gulp.task('default', ['serve:sync', 'serve:hot']);
+gulp.task('default', ['serve:node', 'serve:webpack']);
 
 gulp.task('build', ['clean'], function(callback){
   var tasks = ['images', 'assets', 'fonts'];
@@ -124,71 +125,19 @@ gulp.task('html', function(){
 });
 
 // Launch the node server
-gulp.task('serve', ['build'], function(callback) {
-  var started = false;
-  var cp = require('child_process');
+gulp.task('serve:node', ['build'], function(){
   var assign = require('react/lib/Object.assign');
-
-  var server = (function startup(){
-    var child = cp.fork(path.join(__dirname, './server.js'), {
-      env: assign({ NODE_ENV: 'development' }, process.env)
-    });
-    child.once('message', function(message){
-      if(message.match(/^online$/)) {
-        if(browserSync){
-          browserSync.reload();
-        }
-        if(!started){
-          started = true;
-          gulp.watch(settings.appFiles, function (file) {
-            gutil.log('Restarting development server.');
-            server.kill('SIGTERM');
-            server = startup();
-          });
-          callback();
-        }
-      }
-    });
-    return child;
-  })();
-
-  process.on('exit', function() {
-    server.kill('SIGTERM');
+  nodemon({
+    script: path.join(__dirname, './server.js'),
+    ext: 'js html',
+    env: assign({ NODE_ENV: 'development' }, process.env)
   });
 });
 
-// Launch BrowserSync development server
-gulp.task('serve:sync', ['serve'], function(callback) {
-  browserSync = require('browser-sync');
-
-  browserSync({
-    notify: false,
-    // Run as an https by setting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    https: false,
-    // browser-sync proxies the node app at:
-    proxy: 'localhost:' + settings.ports.reloadProxy
-  }, callback);
-
-  process.on('exit', function() {
-    browserSync.exit();
-  });
-
-  gulp.watch([
-        settings.html.paths.all,
-        settings.images.paths.all,
-        settings.assets.paths.all,
-        settings.fonts.paths.all
-      ].concat(settings.appFiles.map(function(file) {return '!' + file;})
-    ), function(file) {
-      browserSync.reload(path.relative(__dirname, file.path));
-  });
-});
-
-gulp.task('serve:hot', function(){
+// Run webpack hot reload server
+gulp.task('serve:webpack', function(){
+  
   gutil.log('Starting Webpack hot load server');
-  var webpackDevServer = require('webpack-dev-server');
 
   new webpackDevServer(webpack(webpackConfig), {
     //contentBase: 'http://localhost:' + settings.ports.hotPort,
@@ -202,6 +151,7 @@ gulp.task('serve:hot', function(){
     }
     gutil.log('Webpack hot load server listening on port ' + settings.ports.hotPort);
   });
+
 });
 
 gulp.task('release', function(callback){

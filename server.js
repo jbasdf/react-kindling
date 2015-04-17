@@ -65,7 +65,11 @@ app.set('view engine', 'ejs');
 
 // ====================================================================== 
 // Configure session
-app.use(session({ secret: secrets.sessionSecret }));
+app.use(session({ 
+  secret: secrets.sessionSecret,
+  resave: false,
+  saveUninitialized: true
+}));
 
 // ====================================================================== 
 // Configure views and routes
