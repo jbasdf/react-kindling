@@ -40,7 +40,6 @@
     "serve-favicon": "^2.2.0",
     "superagent": "^0.21.0",
     "ua-parser-js": "^0.7.3",
-    "url-loader": "^0.5.5",
     "validator": "^3.32.0"
   },
   "devDependencies": {
