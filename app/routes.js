@@ -1,7 +1,7 @@
 var fs            = require('fs');
 var path          = require('path');
 
-module.exports = function(app, passport){
+module.exports = function(app, controllers){
 
 	// ======================================================================
 	// Method to ensure user is logged in
@@ -11,23 +11,6 @@ module.exports = function(app, passport){
 		}
 		return res.status(422).json({"message" : "Not authorized"});
 	}
-
-	// ======================================================================
-	// Load Controllers
-	function loadControllers(dir){
-	  var controllers = {};
-	  fs.readdirSync(dir).forEach(function(file){
-	    if(file.substr(-3) == '.js'){
-	      var name = file.replace('.js', '');
-	      console.log('Loading controller ' + name);
-	      controllers[name] = require(dir + file)(app, passport);
-	    }
-	  });
-	  return controllers;
-	}
-
-	var controllers = loadControllers(path.join(__dirname, './controllers/'));
-	controllers.strategies = loadControllers(path.join(__dirname, './controllers/strategies/'));
 
 	// ======================================================================
 	//
@@ -70,5 +53,4 @@ module.exports = function(app, passport){
 	app.get('/connect/google/callback', controllers.strategies.google.callback);
 	app.get('/unlink/google', isAuthenticated, controllers.strategies.google.unlink);
 
-	return controllers;
 };

@@ -69,9 +69,24 @@ app.use(session({ secret: secrets.sessionSecret }));
 
 // ====================================================================== 
 // Configure views and routes
+app.set('views', __dirname + '/app/views'); 
 
-app.set('views', __dirname + '/app/views');
-var controllers = require('./app/routes.js')(app, passport); 
+// ======================================================================
+// Load Controllers
+function loadControllers(dir){
+  var controllers = {};
+  fs.readdirSync(dir).forEach(function(file){
+    if(file.substr(-3) == '.js'){
+      var name = file.replace('.js', '');
+      console.log('Loading controller ' + name);
+      controllers[name] = require(dir + file)(app, passport);
+    }
+  });
+  return controllers;
+}
+
+var controllers = loadControllers(path.join(__dirname, './app/controllers/'));
+controllers.strategies = loadControllers(path.join(__dirname, './app/controllers/strategies/'));
 
 // ====================================================================== 
 // Setup passport
@@ -81,9 +96,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+
+// ======================================================================
+// Setup routes
+require('./app/routes.js')(app, controllers);
+
+
 // ======================================================================
 // Launch
-
 app.listen(port);
 
 if (process.env.NODE_ENV !== "production") {
