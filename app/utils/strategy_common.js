@@ -9,13 +9,11 @@ module.exports = {
         return res.status(422).json(info);
       } 
       
-      if(kind == 'local-login'){
-        // User Registration was successful send back the user
-        res.json({"user": req.user});
-      } else {
-        // OAuth login. Redirect to home page.
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        // Redirect to home page.
         res.redirect('/');
-      }
+      });
 
     })(req, res, next);
   }
