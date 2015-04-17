@@ -53,15 +53,15 @@ a {
 }
 
 .login-paper{
-  width: 345px;
-  margin: auto;
+  max-width: 450px;
+  margin: 80px auto 0 auto;
   > div {
     padding: 23px;
   }
 }
 
 .register-paper{
-  width: 400px;
+  max-width: 450px;
   margin: 5% auto;
   > div {
     padding: 23px;
@@ -69,16 +69,84 @@ a {
 }
 
 .auth-button{
-  width: 345px;
+  max-width: 450px;
   height: 70px;
   margin: 20px auto;
   display:block;
 }
 
-.example-button-icon{
-  height: 60px;
-}
-
 .sign-up-button{
   margin-top: 20px;
+}
+
+/*Brandon's Shtuff*/
+
+/*fix height of inner div on buttons*/
+.login-social-button .mui-raised-button .mui-raised-button-container{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.login-social-button .mui-raised-button .mui-raised-button-label{
+  text-transform: none;
+  align-self: center;
+}
+
+.login-social-button .mui-raised-button-container > div{
+  display: flex;
+  align-items: center;
+  padding-left: 23px;
+}
+.login-social-button .example-button-icon::before{
+  color: #fff;
+  font-size: .9em;
+}
+.icon-facebook{
+  margin-top: -3px;
+}
+.mui-text-field{
+  width: 100%;
+}
+.create-account-button .mui-flat-button-label{
+  color: rgba(0,0,0,.54);
+}
+.create-account-button{
+  margin-top: 50px;
+  display: inline-block;
+  color: #666;
+}
+.login-button{
+  float: right;
+  margin-top: 50px;
+}
+.facebook-login .mui-raised-button.mui-is-secondary .mui-raised-button-container{
+  background-color: #507BBE;
+}
+.twitter-login .mui-raised-button.mui-is-secondary .mui-raised-button-container{
+  background-color: #57C1EE;
+}
+.google-login .mui-raised-button.mui-is-secondary .mui-raised-button-container{
+  background-color: #E44B25;
+}
+.mui-app-bar{
+  background-color: #009698;
+}
+.mui-raised-button.mui-is-primary .mui-raised-button-container{
+  background-color: #FF5252;
+}
+.mui-raised-button.mui-is-primary:hover .mui-raised-button-container{
+  background-color: #EF3A3A;
+}
+.mui-flat-button.mui-is-primary:hover, .mui-flat-button.mui-is-primary.mui-is-keyboard-focused{
+  background-color: #FCD0D0;
+}
+.mui-text-field .mui-text-field-focus-underline{
+  border-color: #009698;
+}
+.mui-text-field.mui-has-floating-labels.mui-is-focused .mui-text-field-floating-label{
+  color: #009698;
+}
+h4{
+  padding: 0;
 }
