@@ -66,7 +66,16 @@ module.exports = function(app){
         apiPath = settings.devApplicationUrl + '/';
       }
 
+      var displayName = "";
+      
+      if(req.user){
+        if(req.user.twitter){
+          displayName = req.user.twitter.displayName;
+        }
+      }
+
       res.render('index.ejs', {
+        user: displayName,
         content: content,
         scriptPath: scriptPath,
         cssPath: cssPath,
