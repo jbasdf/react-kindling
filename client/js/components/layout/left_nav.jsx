@@ -69,7 +69,7 @@ export default React.createClass({
 
     for (var i = this.state.menuItems.length - 1; i >= 0; i--) {
       currentItem = this.state.menuItems[i];
-      if (currentItem.route && this.isActive(currentItem.route)) return i;
+      if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
     }
   },
 
