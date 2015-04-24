@@ -130,6 +130,9 @@ gulp.task('serve:node', ['build'], function(){
   nodemon({
     script: path.join(__dirname, './server.js'),
     ext: 'js html',
+    execMap: {
+      js: "node --debug"
+    },
     env: assign({ NODE_ENV: 'development' }, process.env)
   });
 });
