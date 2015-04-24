@@ -1,42 +1,44 @@
+"use strict";
+
 import React          from "react";
 import assign         from "object-assign";
 
 var { func } = React.PropTypes;
 
-export default function(Component, props, stubs){
+export default (Component, props, stubs) => {
+  function RouterStub() { }
+
+  assign(RouterStub, {
+    makePath () {},
+    makeHref () {},
+    transitionTo () {},
+    replaceWith () {},
+    goBack () {},
+    getCurrentPath () {},
+    getCurrentRoutes () {},
+    getCurrentPathname () {},
+    getCurrentParams () {},
+    getCurrentQuery () {},
+    isActive () {},
+    getRouteAtDepth() {},
+    setRouteComponentAtDepth() {}
+  }, stubs);
+
   return React.createClass({
     childContextTypes: {
-      makePath: func,
-      makeHref: func,
-      transitionTo: func,
-      replaceWith: func,
-      goBack: func,
-      getCurrentPath: func,
-      getCurrentRoutes: func,
-      getCurrentPathname: func,
-      getCurrentParams: func,
-      getCurrentQuery: func,
-      isActive: func,
+      router: React.PropTypes.func,
+      routeDepth: React.PropTypes.number
     },
 
     getChildContext () {
-      return assign({
-        makePath () {},
-        makeHref () {},
-        transitionTo () {},
-        replaceWith () {},
-        goBack () {},
-        getCurrentPath () {},
-        getCurrentRoutes () {},
-        getCurrentPathname () {},
-        getCurrentParams () {},
-        getCurrentQuery () {},
-        isActive () {},
-      }, stubs);
+      return {
+        router: RouterStub,
+        routeDepth: 0
+      };
     },
 
     render () {
-      return <Component {...props} />
+      return <Component {...props} />;
     }
   });
 };

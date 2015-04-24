@@ -8,7 +8,11 @@ import { LeftNav } from "material-ui";
 
 export default React.createClass({
 
-  mixins: [StoreKeeper, Router.Navigation, Router.State],
+  mixins: [StoreKeeper],
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   statics: {
     stores: [User],    // Subscribe to changes in the messages store
@@ -67,18 +71,22 @@ export default React.createClass({
   _getSelectedIndex: function() {
     var currentItem;
 
+    var router = this.context.router;
+
     for (var i = this.state.menuItems.length - 1; i >= 0; i--) {
       currentItem = this.state.menuItems[i];
-      if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
+      if (currentItem.route && router.isActive(currentItem.route)) return i;
     }
   },
 
   _onLeftNavChange: function(e, key, payload) {
-    this.transitionTo(payload.route);
+    var router = this.context.router;
+    router.transitionTo(payload.route);
   },
 
   _onHeaderClick: function() {
-    this.transitionTo('root');
+    var router = this.context.router;
+    router.transitionTo('root');
     this.refs.leftNav.close();
   }
 
