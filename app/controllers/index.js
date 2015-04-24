@@ -67,15 +67,17 @@ module.exports = function(app){
       }
 
       var displayName = "";
-      
+      var email = "";
+      var loggedIn = false;
       if(req.user){
-        if(req.user.twitter){
-          displayName = req.user.twitter.displayName;
-        }
+        displayName = req.user.displayName();
+        loggedIn = true;
       }
 
       res.render('index.ejs', {
-        user: displayName,
+        displayName: displayName,
+        email: email,
+        loggedIn: loggedIn,
         content: content,
         scriptPath: scriptPath,
         cssPath: cssPath,

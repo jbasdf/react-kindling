@@ -5,20 +5,24 @@ import Constants      from "../constants";
 import StoreCommon    from "./store_common";
 import assign         from "object-assign";
 
-let _user = {};
+var _user = {};
 
 // log the user in
-function login(email, password){
-  return true;
+function login(email, displayName, password){
+  _user.email = email;
+  _user.loggedIn = true;
+  _user.displayName = displayName;
 }
 
 // Register
 function register(user){
-  return true; 
+  _user.email = user.email;
+  _user.loggedIn = true;
+  _user.displayName = user.displayName;
 }
 
 // Extend User Store with EventEmitter to add eventing capabilities
-let UserStore = assign({}, StoreCommon, {
+var UserStore = assign({}, StoreCommon, {
 
   // Return current user
   current(){
@@ -26,24 +30,20 @@ let UserStore = assign({}, StoreCommon, {
   },
 
   loggedIn(){
-    return _user.email !== undefined;
-  },
-
-  token(){
-    return _user.token;
+    return _user.loggedIn;
   }
 
 });
 
 // Register callback with Dispatcher
 Dispatcher.register(function(payload) {
-  let action = payload.action;
+  var action = payload.action;
   
   switch(action){
 
     // Respond to LOGIN action
     case Constants.LOGIN:
-      login(payload.email, payload.password);
+      login(payload.email, payload.displayName, payload.password);
       break;
 
     // Respond to REGISTER action

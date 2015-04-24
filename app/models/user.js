@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
 
   email: String,
   password: String,
+  name: String,
 
   facebook: {
     id: String,
@@ -38,6 +39,15 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.methods.displayName = function(){
+  return this.name || this.facebook.name || this.twitter.displayName;
+};
+  
+userSchema.methods.username = function(){
+  return this.twitter.username;
+};
+
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
