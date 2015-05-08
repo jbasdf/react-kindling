@@ -1,13 +1,14 @@
 "use strict";
 
-import Request      from "superagent";
-import User         from "../stores/user";
-import Constants    from "../constants";
-import Dispatcher   from "../dispatcher";
+import Request       from "superagent";
+import User          from "../stores/user";
+import Constants     from "../constants";
+import Dispatcher    from "../dispatcher";
+import SettingsStore from '../stores/settings';
 
 const TIMEOUT = 10000;
 
-let _pendingRequests = {};
+var _pendingRequests = {};
 
 function abortPendingRequests(key) {
   if(_pendingRequests[key]) {
@@ -22,8 +23,12 @@ function token() {
   return User.token();
 }
 
-function makeUrl(part) {
-  return GlobalSettings.apiUrl + part;
+function makeUrl(part){
+  if(part.indexOf("http") >= 0){
+    return part;
+  } else {
+    return SettingsStore.current().apiUrl + '/' + part;
+  }
 }
 
 // GET request with a token param
@@ -42,6 +47,29 @@ function post(url, body) {
   return Request
     .post(url)
     .send(body)
+    .set('Accept', 'application/json')
+    .timeout(TIMEOUT)
+    .query({
+      authtoken: token()
+    });
+}
+
+// PUT request with a token param
+function put(url, body) {
+  return Request
+    .put(url)
+    .send(body)
+    .set('Accept', 'application/json')
+    .timeout(TIMEOUT)
+    .query({
+      authtoken: token()
+    });
+}
+
+// DELETER request with a token param
+function del(url) {
+  return Request
+    .del(url)
     .set('Accept', 'application/json')
     .timeout(TIMEOUT)
     .query({
@@ -73,7 +101,7 @@ function dispatchResponse(key) {
 
 function doRequest(key, url, callback){
   abortPendingRequests(key);
-  let request = _pendingRequests[key] = callback(makeUrl(url));
+  var request = _pendingRequests[key] = callback(makeUrl(url));
   request.end(dispatchResponse(key));
   return request;
 }
@@ -89,6 +117,18 @@ export default {
   post(key, url, body){
     return doRequest(key, url, function(fullUrl){
       return post(fullUrl, body);
+    });
+  },
+
+  put(key, url, body){
+    return doRequest(key, url, function(fullUrl){
+      return put(fullUrl, body);
+    });
+  },
+
+  del(key, url){
+    return doRequest(key, url, function(fullUrl){
+      return del(fullUrl);
     });
   }
 
