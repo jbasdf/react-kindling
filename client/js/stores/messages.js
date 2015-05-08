@@ -27,7 +27,7 @@ var MessagesStore = assign({}, StoreCommon, {
 
 // Register callback with Dispatcher
 Dispatcher.register(function(payload) {
-  
+
   switch(payload.action){
 
     // Respond to TIMEOUT action
@@ -58,7 +58,7 @@ Dispatcher.register(function(payload) {
 
 
 function addServerMessage(message){
-  let messageId = addMessage(JSON.parse(message.text).message);
+  var messageId = addMessage(JSON.parse(message.text).message);
   setTimeout(function(){
     removeMessage(messageId);
   }, MessageTimeout);

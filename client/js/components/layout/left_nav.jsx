@@ -18,9 +18,9 @@ export default React.createClass({
     stores: [User],    // Subscribe to changes in the messages store
     getState: () => {  // Method to retrieve state from stores
 
-      let loggedIn = User.loggedIn();
+      var loggedIn = User.loggedIn();
 
-      let menuItems = [
+      var menuItems = [
         { route: 'home', text: 'Home' }
       ];
 

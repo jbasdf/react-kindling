@@ -7,9 +7,9 @@ describe('index', function() {
   it('renders the main chrome', function() {
 
     // Render component wrapped in router context
-    // let Subject = StubRouterContext(Index, {});
-    
-    // let result = TestUtils.renderIntoDocument(<Subject/>);
+    // var Subject = StubRouterContext(Index, {});
+
+    // var result = TestUtils.renderIntoDocument(<Subject/>);
 
     // expect(result).toBeDefined();
 

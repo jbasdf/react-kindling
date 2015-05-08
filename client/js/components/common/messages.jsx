@@ -26,7 +26,7 @@ export default React.createClass({
       return null;
     }
 
-    let messages = this.state.messages.map(function(message){
+    var messages = this.state.messages.map(function(message){
       return <Message>{message}</Message>;
     });
 

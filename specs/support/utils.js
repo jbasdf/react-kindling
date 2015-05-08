@@ -5,7 +5,7 @@ export default {
 
   findTextField(textFields, labelText){
     return _.find(textFields, function(field){
-      let label = TestUtils.findRenderedDOMComponentWithTag(field, 'label');
+      var label = TestUtils.findRenderedDOMComponentWithTag(field, 'label');
       return label.getDOMNode().textContent.toLowerCase() == labelText;
     });
   }

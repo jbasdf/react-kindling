@@ -3,7 +3,7 @@ import Router   from 'react-router';
 
 import routes   from '../client/js/routes';
 
-let Route = Router.Route;
+var Route = Router.Route;
 
 describe('default route', function () {
   it('renders home', function (done) {

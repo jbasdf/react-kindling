@@ -18,18 +18,18 @@ var passportConfig  = require('./config/passport');
 var port            = process.env.PORT || settings.ports.server;
 
 
-// ====================================================================== 
+// ======================================================================
 // Setup the database
 
 mongoose.connect(secrets.mongoUrl);
 
-// ====================================================================== 
+// ======================================================================
 // set up logging
 
 app.use(morgan('dev')); // log every request to the console
 
-// ====================================================================== 
-// Server configuration. If using nginx you might want to let nginx handle these instead
+// ======================================================================
+// Server configuration. If using nginx you might want to var nginx handle these instead
 
 // Enable cross-origin resource sharing (CORS)
 var cors = require('cors');
@@ -39,7 +39,7 @@ app.use(cors());
 var compression = require('compression');
 app.use(compression());
 
-// ====================================================================== 
+// ======================================================================
 // Serve static assets in the public directory. In production serve assets in build as well
 //app.use(favicon(path.join(__dirname, '/app/assets/favicon.ico')));
 
@@ -51,29 +51,29 @@ if (process.env.NODE_ENV === "production"){
   app.use('/build', express.static(path.join(__dirname, '/build')));
 }
 
-// ====================================================================== 
+// ======================================================================
 // Parse Cookies, forms and urls
 
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ====================================================================== 
+// ======================================================================
 // Use ejs for server side templates
 
 app.set('view engine', 'ejs');
 
-// ====================================================================== 
+// ======================================================================
 // Configure session
-app.use(session({ 
+app.use(session({
   secret: secrets.sessionSecret,
   resave: false,
   saveUninitialized: true
 }));
 
-// ====================================================================== 
+// ======================================================================
 // Configure views and routes
-app.set('views', __dirname + '/app/views'); 
+app.set('views', __dirname + '/app/views');
 
 // ======================================================================
 // Load Controllers
@@ -92,7 +92,7 @@ function loadControllers(dir){
 var controllers = loadControllers(path.join(__dirname, './app/controllers/'));
 controllers.strategies = loadControllers(path.join(__dirname, './app/controllers/strategies/'));
 
-// ====================================================================== 
+// ======================================================================
 // Setup passport
 passportConfig(passport, controllers);
 
