@@ -44,16 +44,16 @@ You can use React-Kindling to build a client only application or a client-server
 
 ### Client Only
 Open up settings. Change 'projectType' to 'client'. When you run 'gulp' all of the assets in the 'client' directory
-will be built into a client only html/js/css application. The development files will be found in /build and the 
+will be built into a client only html/js/css application. The development files will be found in /build and the
 production files will be in /public.
 
 ### Client Server
-Open up settings. 
+Open up settings.
 
 Change 'projectType' to 'client-server'.
 Set applicationUrl to your domain.
 
-Pass values from the server to the client via `GlobalSettings`. This code can be found in index.ejs.
+Pass values from the server to the client via `DEFAULT_SETTINGS`. This code can be found in index.ejs.
 
 ####ngrok
 Ngrok makes it easy to provide a public url to an application running on your local machine. This
@@ -63,7 +63,7 @@ and then run two instances one for the node server and another for the webpack s
 `ngrok --subdomain myserversubdomain 8888`
 `ngrok --subdomain myassetssubdomain 8080`
 
-Change the subdomains to be a value you prefer and then update applicationUrl and assetsUrl 
+Change the subdomains to be a value you prefer and then update applicationUrl and assetsUrl
 in secrets.js to match your changes.
 
 

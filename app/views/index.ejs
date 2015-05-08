@@ -9,12 +9,12 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="<%= cssPath %>">
   <script type="text/javascript">
-    var GlobalSettings = {
+    window.DEFAULT_SETTINGS = {
       apiUrl: "<%= apiPath %>",
       displayName: "<%= displayName %>",
       email: "<%= email %>",
       loggedIn: <%= loggedIn %>
-    }
+    };
   </script>
 </head>
 <body>

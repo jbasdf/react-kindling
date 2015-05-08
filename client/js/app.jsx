@@ -4,6 +4,7 @@ import React from 'react';
 import Router from 'react-router';
 
 import routes from './routes';
+import SettingsAction from './actions/settings';
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -24,6 +25,9 @@ if (window.matchMedia("(max-width: 639px)").matches){
 } else {
   deviceType = "desktop";
 }
+
+// Initialize store singletons
+SettingsAction.load(window.DEFAULT_SETTINGS);
 
 Router.run(routes, (Handler) => {
   return React.render(<Handler />, document.body);

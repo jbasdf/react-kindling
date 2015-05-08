@@ -1,8 +1,8 @@
 "use strict";
 
 export default {
-  
-  // User 
+
+  // User
   LOGIN: "login",
   LOGIN_PENDING: "login_pending",
   REGISTER: "register",
@@ -11,6 +11,10 @@ export default {
   // Errors
   TIMEOUT: "timeout",
   ERROR: "error",
-  NOT_AUTHORIZED: "not_authorized"
-  
+  NOT_AUTHORIZED: "not_authorized",
+
+  // settings
+  SETTINGS_LOAD: "settings_load",
+  USER_LOAD: "user_load"
+
 };
