@@ -8,16 +8,31 @@ import { Toolbar } from "material-ui";
 
 export default React.createClass({
 
-  mixins: [StoreKeeper],
 
-  statics: {
-    stores: [Messages],   // Subscribe to changes in the messages store
-    getState: () => {     // Method to retrieve state from stores
-      return {
-        messages: Messages.current(),
-        hasMessages: Messages.hasMessages()
-      };
-    }
+  getState(){
+    return {
+      messages: Messages.current(),
+      hasMessages: Messages.hasMessages()
+    };
+  },
+
+  getInitialState(){
+    return this.getState();
+  },
+
+  // Method to update state based upon store changes
+  storeChanged(){
+    this.setState(this.getState());
+  },
+
+  // Listen for changes in the stores
+  componentDidMount(){
+    Messages.addChangeListener(this.storeChanged);
+  },
+
+  // Remove change listers from stores
+  componentWillUnmount(){
+    Messages.removeChangeListener(this.storeChanged);
   },
 
   render() {
