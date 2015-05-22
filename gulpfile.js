@@ -113,7 +113,7 @@ gulp.task('html', function(){
     .pipe(rename({ extname: "" }))
     .pipe(rename({ extname: ".html" }));
       
-  if(release){
+  if(!release){
     return html
       .pipe(embedlr())
       .pipe(gulp.dest(settings.html.paths.output.dev));
@@ -130,9 +130,9 @@ gulp.task('serve:node', ['build'], function(){
   nodemon({
     script: path.join(__dirname, './server.js'),
     ext: 'js html',
-    execMap: {
-      js: "node --debug"
-    },
+    // execMap: {
+    //   js: "node --debug"
+    // },
     env: assign({ NODE_ENV: 'development' }, process.env)
   });
 });
