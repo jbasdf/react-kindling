@@ -27,7 +27,7 @@ function makeUrl(part){
   if(part.indexOf("http") >= 0){
     return part;
   } else {
-    return SettingsStore.current().apiUrl + '/' + part;
+    return SettingsStore.current().apiUrl + part;
   }
 }
 
