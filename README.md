@@ -1,3 +1,6 @@
+# NOTE this project is not being actively maintained and contains bugs. It can be used as a starting point, but it needs work.
+
+
 # React.s Kindling
 
 This is a React.js starter project. You can use it to build a client only application or a full stack node.js application.
