@@ -58,7 +58,7 @@ Set applicationUrl to your domain.
 
 Pass values from the server to the client via `DEFAULT_SETTINGS`. This code can be found in index.ejs.
 
-####ngrok
+#### ngrok
 Ngrok makes it easy to provide a public url to an application running on your local machine. This
 comes in handy when dealing with OAuth providers that don't permit localhost. Install ngrok - https://ngrok.com/
 and then run two instances one for the node server and another for the webpack server:
