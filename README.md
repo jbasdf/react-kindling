@@ -1,4 +1,4 @@
-# NOTE this project is not being actively maintained and contains bugs. It can be used as a starting point, but it needs work.
+# NOTE this project is not being actively maintained and contains bugs. It can be used as a starting point, but it needs work. As an alternative check out the [React Client Starter App](https://github.com/atomicjolt/react_client_starter_app) which is the newer and maintained version.
 
 
 # React.s Kindling
